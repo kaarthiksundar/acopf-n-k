@@ -92,6 +92,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
         @constraint(master_problem, eta <= result["objective"] + sum{alpha[i]*x[i], i in collect(keys(alpha))})
     end
     
+    final_lines = current_lines
     tic()
     solve(master_problem)
 
