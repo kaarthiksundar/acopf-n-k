@@ -1,7 +1,6 @@
 using JuMP
 using Ipopt
 using CPLEX
-using Gurobi
 using PowerModels
 using Distributions
 include("prob.jl")
@@ -13,6 +12,8 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     data = PowerModels.parse_file(file)
     parse_prob_file(file, data)
     buses = [ Int(bus["index"]) => bus for bus in data["bus"] ]
+    num_buses = length(buses)
+    println(num_buses)
     buses = filter((i, bus) -> bus["bus_type"] != 4, buses)
     branches = [ Int(branch["index"]) => branch for branch in data["branch"] ]
     branches = filter((i, branch) -> branch["br_status"] == 1 && branch["f_bus"] in keys(buses) && branch["t_bus"] in keys(buses), branches)
@@ -61,7 +62,8 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     zlb = -1e10
     zub = 1e10
     eps = 1e-6
-
+    
+    tic()
     solve(master_problem)
 
     iteration = 0
@@ -126,12 +128,49 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     println("probability = prob(x*) ... $actual_prob")
     println("load shed = η* ... $eta_val")
     println("expected load shed = prob(x*)⋅η* ... $(actual_prob*eta_val)")
+    time_taken = toq()
+    println("time ... $time_taken")
+    # solving the AC load shed model on the final set of lines
+    data = PowerModels.parse_file(file)
+    for branch in data["branch"]
+        for index in final_lines
+            if Int(branch["index"]) == index
+                branch["br_status"] = 0
+            end
+        end
+    end
+    pm = ACPPowerModel(data; solver = IpoptSolver(print_level=0))
+    post_pfls(pm)
+    status, solve_time = solve(pm)
+    result = PowerModels.build_solution(pm, status, solve_time)
+    println("full AC load shed ... $(result["objective"])")
+    println("expected AC load shed ... $(actual_prob*result["objective"])")
     println("###################################")
+    solution = Dict{AbstractString,Any}("k" => k, "lines" => collect(final_lines), 
+                                        "model" => model_constructor, "time" => time_taken,
+                                        "cut" => cut_constructor, "prob" => actual_prob,
+                                        "load_shed" => eta_val,
+                                        "expected_load_shed" => actual_prob*eta_val,
+                                        "ac_load_shed" => result["objective"], 
+                                        "expected_ac_load_shed" => actual_prob*result["objective"],
+                                        "iterations" => iteration)
+    push!(solution_vector, solution)
 
-
+    return num_buses
 end
 
-# model_constructor = DCPPowerModel; cut_constructor = "DC"/"AC"
-for k in [30]
-    master_problem(file = "../data/nesta_case73_ieee_rts.m", k = k, solver = IpoptSolver(print_level=0), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
-end 
+solution_dict = Dict{AbstractString,Any}()
+solution_vector = Any[] 
+
+args = Dict{Any,Any}()
+println(ARGS[1])
+args["file"] = ASCIIString(ARGS[1])
+args["k"] = parse(Int, ARGS[2])
+
+num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
+num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
+num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
+
+solution_dict["solution"] = solution_vector 
+json_string = JSON.json(solution_dict)
+write("stoch_$(args["k"])_$(num_buses).json", json_string)

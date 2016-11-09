@@ -68,6 +68,7 @@ function run_heuristic(; file = "../data/nesta_case24_ieee_rts.m", k = 4)
     end 
 end
 
-k = parse(Int, ARGS[1])
-det_or_stoch = parse(Int, ARGS[2])
-run_heuristic(file = "../data/nesta_case73_ieee_rts.m", k = k)
+file = ASCIIString(ARGS[1])
+k = parse(Int, ARGS[2])
+det_or_stoch = parse(Int, ARGS[3])
+run_heuristic(file = file, k = k)

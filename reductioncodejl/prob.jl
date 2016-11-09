@@ -43,7 +43,7 @@ function create_and_solve_det_milp(data::Dict{AbstractString,Any}, sets::PowerMo
 
     w_edge = [ i => 1 for i in sets.branch_indexes ]
     @constraint(m, gen_off[v in gen_bus_indexes], y[v] == 0)
-    @constraint(m, sum{w_edge[i]*x[i], i in sets.branch_indexes} <= k)
+    @constraint(m, sum{w_edge[i]*x[i], i in sets.branch_indexes} == k)
     @objective(m, Max, sum{w_vertex[i]*y[i], i in sets.bus_indexes})
 
     index_map = IndexMap()
@@ -174,7 +174,7 @@ function create_and_solve_stoch_milp(data::Dict{AbstractString,Any}, sets::Power
 
     w_edge = [ i => 1 for i in sets.branch_indexes ]
     @constraint(m, gen_off[v in gen_bus_indexes], y[v] == 0)
-    @constraint(m, sum{w_edge[i]*x[i], i in sets.branch_indexes} <= k)
+    @constraint(m, sum{w_edge[i]*x[i], i in sets.branch_indexes} == k)
     @constraint(m, p == sum{ x[i]*log_p[i], i in sets.branch_indexes})
     @constraint(m, eta == sum{w_vertex[i]*y[i], i in sets.bus_indexes})
     @objective(m, Max, z)

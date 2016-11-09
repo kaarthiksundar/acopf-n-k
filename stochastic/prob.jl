@@ -60,6 +60,23 @@ function variable_reactive_generation{T <: PowerModels.AbstractDCPForm}(pm::Gene
     # do nothing for dc model - no reactive variables
 end
 
+function variable_reactive_generation{T <: PowerModels.AbstractACPForm}(pm::GenericPowerModel{T}; bounded = true)
+    for i in pm.set.gen_indexes
+        if (pm.set.gens[i]["qmin"] > 0 && pm.set.gens[i]["qmax"] > 0)
+            pm.set.gens[i]["qmin"] = 0
+        end
+        if (pm.set.gens[i]["qmin"] < 0 && pm.set.gens[i]["qmax"] < 0)
+            pm.set.gens[i]["qmax"] = 0
+        end
+    end
+    if bounded
+        @variable(pm.model, pm.set.gens[i]["qmin"] <= qg[i in pm.set.gen_indexes] <= pm.set.gens[i]["qmax"], start = PowerModels.getstart(pm.set.gens, i, "qg_start"))
+    else
+        @variable(pm.model, qg[i in pm.set.gen_indexes], start = PowerModel.getstart(pm.set.gens, i, "qg_start"))
+    end
+    return qg
+end
+
 function variable_load_shed{T <: PowerModels.AbstractDCPForm}(pm::GenericPowerModel{T})
     ld_min = [i => 0.0 for i in pm.set.bus_indexes]
     ld_max = [i => 0.0 for i in pm.set.bus_indexes]
@@ -73,6 +90,18 @@ function variable_load_shed{T <: PowerModels.AbstractDCPForm}(pm::GenericPowerMo
 end
 
 function variable_load_shed{T <: PowerModels.AbstractWRForm}(pm::GenericPowerModel{T})
+    ld_min = [i => 0.0 for i in pm.set.bus_indexes]
+    ld_max = [i => 0.0 for i in pm.set.bus_indexes]
+    for i in pm.set.bus_indexes
+        if (pm.set.buses[i]["pd"] > 0 || pm.set.buses[i]["qd"] != 0)
+            ld_max[i] = 1.0
+        end
+    end
+    @variable(pm.model, ld_min[i] <= ld[i in pm.set.bus_indexes] <= ld_max[i], start = 0.0)
+    return ld
+end
+
+function variable_load_shed{T <: PowerModels.AbstractACPForm}(pm::GenericPowerModel{T})
     ld_min = [i => 0.0 for i in pm.set.bus_indexes]
     ld_max = [i => 0.0 for i in pm.set.bus_indexes]
     for i in pm.set.bus_indexes
@@ -133,6 +162,32 @@ function constraint_reactive_kcl_ls{T <: PowerModels.AbstractWRForm}(pm::Generic
     bus_gens = pm.set.bus_gens[i]
 
     w = getvariable(pm.model, :w)
+    q = getvariable(pm.model, :q)
+    qg = getvariable(pm.model, :qg)
+    ld = getvariable(pm.model, :ld)
+
+    c = @constraint(pm.model, sum{q[a], a in bus_branches} == sum{qg[g], g in bus_gens} - bus["qd"]*(1-ld[i]))
+    return Set([c])
+end
+
+function constraint_active_kcl_ls{T <: PowerModels.AbstractACPForm}(pm::GenericPowerModel{T}, bus)
+    i = bus["index"]
+    bus_branches = pm.set.bus_branches[i]
+    bus_gens = pm.set.bus_gens[i]
+
+    p = getvariable(pm.model, :p)
+    pg = getvariable(pm.model, :pg)
+    ld = getvariable(pm.model, :ld)
+
+    c = @constraint(pm.model, sum{p[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]))
+    return Set([c])
+end
+
+function constraint_reactive_kcl_ls{T <: PowerModels.AbstractACPForm}(pm::GenericPowerModel{T}, bus)
+    i = bus["index"]
+    bus_branches = pm.set.bus_branches[i]
+    bus_gens = pm.set.bus_gens[i]
+
     q = getvariable(pm.model, :q)
     qg = getvariable(pm.model, :qg)
     ld = getvariable(pm.model, :ld)
@@ -206,3 +261,49 @@ function constraint_reactive_ohms{T <: PowerModels.AbstractWRForm}(pm::GenericPo
     c2 = @constraint(pm.model, q_to == -b*w_to - (-b*wr) + (g*wi) )
     return Set([c1, c2])
 end
+
+function constraint_active_ohms{T <: PowerModels.AbstractACPForm}(pm::GenericPowerModel{T}, branch)
+    i = branch["index"]
+    f_bus = branch["f_bus"]
+    t_bus = branch["t_bus"]
+    f_idx = (i, f_bus, t_bus)
+    t_idx = (i, t_bus, f_bus)
+
+    p_fr = getvariable(pm.model, :p)[f_idx]
+    p_to = getvariable(pm.model, :p)[t_idx]
+    v_fr = getvariable(pm.model, :v)[f_bus]
+    v_to = getvariable(pm.model, :v)[t_bus]
+    t_fr = getvariable(pm.model, :t)[f_bus]
+    t_to = getvariable(pm.model, :t)[t_bus]
+
+
+    g = branch["g"]
+    b = branch["b"]
+
+    c1 = @NLconstraint(pm.model, p_fr == g*v_fr^2 + -g*v_fr*v_to*cos(t_fr-t_to) + -b*v_fr*v_to*sin(t_fr-t_to) )
+    c2 = @NLconstraint(pm.model, p_to == g*v_to^2 + -g*v_fr*v_to*cos(t_to-t_fr) + -b*v_fr*v_to*sin(t_to-t_fr) )
+    return Set([c1, c2])
+end
+
+function constraint_reactive_ohms{T <: PowerModels.AbstractACPForm}(pm::GenericPowerModel{T}, branch)
+    i = branch["index"]
+    f_bus = branch["f_bus"]
+    t_bus = branch["t_bus"]
+    f_idx = (i, f_bus, t_bus)
+    t_idx = (i, t_bus, f_bus)
+
+    q_fr = getvariable(pm.model, :q)[f_idx]
+    q_to = getvariable(pm.model, :q)[t_idx]
+    v_fr = getvariable(pm.model, :v)[f_bus]
+    v_to = getvariable(pm.model, :v)[t_bus]
+    t_fr = getvariable(pm.model, :t)[f_bus]
+    t_to = getvariable(pm.model, :t)[t_bus]
+
+    g = branch["g"]
+    b = branch["b"]
+
+    c1 = @NLconstraint(pm.model, q_fr == -b*v_fr^2 + b*v_fr*v_to*cos(t_fr-t_to) + -g*v_fr*v_to*sin(t_fr-t_to) )
+    c2 = @NLconstraint(pm.model, q_to == -b*v_to^2 + b*v_fr*v_to*cos(t_to-t_fr) + -g*v_fr*v_to*sin(t_to-t_fr) )
+    return Set([c1, c2])
+end
+
