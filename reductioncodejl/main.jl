@@ -9,14 +9,13 @@ function run_heuristic(; file = "../data/nesta_case24_ieee_rts.m", k = 4)
 
     data = PowerModels.parse_file(file)
     data, sets = PowerModels.process_raw_data(data)
+    parse_prob_file(file, data)
     buses = [ Int(bus["index"]) => bus for bus in data["bus"] ]
     buses = filter((i, bus) -> bus["bus_type"] != 4, buses)
     branches = [ Int(branch["index"]) => branch for branch in data["branch"] ]
     branches = filter((i, branch) -> branch["br_status"] == 1 && branch["f_bus"] in keys(buses) && branch["t_bus"] in keys(buses), branches)
     branch_indexes = collect(keys(branches))
-    srand(2016)
-    d = Uniform()
-    branch_probabilities = [ i => round(rand(d), 3) for i in branch_indexes ]
+    branch_probabilities = [ i => branches[i]["prob"] for i in branch_indexes ]
     log_p = [ i => log(branch_probabilities[i]) for i in branch_indexes ]
     #=
     layout_file = string(chop(file), "layout")
@@ -39,8 +38,11 @@ function run_heuristic(; file = "../data/nesta_case24_ieee_rts.m", k = 4)
     remove_redundant_attacks(successful_attacks)
     
     for i in 2:k
-        attack = create_and_solve_det_milp(data, sets, successful_attacks, k = i)
-        # attack = create_and_solve_stoch_milp(data, sets, successful_attacks, log_p, k = i)
+        if det_or_stoch == 1
+            attack = create_and_solve_det_milp(data, sets, successful_attacks, k = i)
+        else 
+            attack = create_and_solve_stoch_milp(data, sets, successful_attacks, log_p, k = i)
+        end 
         push!(successful_attacks, attack)
     end
 
@@ -59,7 +61,13 @@ function run_heuristic(; file = "../data/nesta_case24_ieee_rts.m", k = 4)
     json_dict = Dict{AbstractString,Any}()
     json_dict["attack"] = attack_sol
     json_string = JSON.json(json_dict)
-    write("isolation.json", json_string)
+    if det_or_stoch == 1
+        write("det_isolation.json", json_string)
+    else 
+        write("stoch_isolation.json", json_string)
+    end 
 end
 
-run_heuristic(file = "../data/nesta_case73_ieee_rts.m", k = 20)
+k = parse(Int, ARGS[1])
+det_or_stoch = parse(Int, ARGS[2])
+run_heuristic(file = "../data/nesta_case73_ieee_rts.m", k = k)
