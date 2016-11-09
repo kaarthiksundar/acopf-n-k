@@ -32,7 +32,8 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     end
     # println("total load: $totalload ...")
 
-    master_problem = Model(solver=GurobiSolver(LogToConsole=0))
+    #master_problem = Model(solver=GurobiSolver(LogToConsole=0))
+    master_problem = Model(solver=CplexSolver())
     @variable(master_problem, 1e-6 <= eta <= 1e6)
     @variable(master_problem, x[i in branch_indexes], Bin)
     @variable(master_problem, p <= 0)
