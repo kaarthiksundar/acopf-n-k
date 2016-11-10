@@ -197,4 +197,11 @@ num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSol
 
 solution_dict["solution"] = solution_vector 
 json_string = JSON.json(solution_dict)
-write("./json_files/det_$(args["k"])_$(num_buses).json", json_string)
+
+if endswith(args["file"], "api.m")
+    write("./json_files/det_$(args["k"])_$(num_buses)_api.json", json_string)
+elseif endswith(args["file"], "sad.m")
+    write("./json_files/det_$(args["k"])_$(num_buses)_sad.json", json_string)
+else
+    write("./json_files/det_$(args["k"])_$(num_buses).json", json_string)
+end
