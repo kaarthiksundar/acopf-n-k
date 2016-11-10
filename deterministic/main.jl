@@ -25,6 +25,22 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     else
         println("no start solution")
     end 
+
+    if file == "../data/nesta_case73_ieee_rts__api.m"
+        json_data_string = readall(open("det_isolation_73_api.json"))
+    elseif file == "../data/nesta_case24_ieee_rts__api.m"
+        json_data_string = readall(open("det_isolation_24_api.json"))
+    else
+        println("no start solution")
+    end 
+    
+    if file == "../data/nesta_case73_ieee_rts__sad.m"
+        json_data_string = readall(open("det_isolation_73_sad.json"))
+    elseif file == "../data/nesta_case24_ieee_rts__sad.m"
+        json_data_string = readall(open("det_isolation_24_sad.json"))
+    else
+        println("no start solution")
+    end 
     
     if json_data_string != 0
         initial_feasible_solution = JSON.parse(json_data_string, dicttype = Dict{AbstractString,Any})
