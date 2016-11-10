@@ -1,0 +1,1328 @@
+../data/nesta_case24_ieee_rts__sad.m
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+no start solution
+no start solution
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+Tried aggregator 1 time.
+LP Presolve eliminated 34 rows and 80 columns.
+Aggregator did 6 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.03 ticks)
+CPLEX Error  3003: Not a mixed-integer problem.
+Tried aggregator 1 time.
+MIP Presolve eliminated 2 rows and 39 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.01 ticks)
+ub: 18.220000000000002, lb: 15.05
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.02 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.02 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 37 rows and 83 columns.
+Aggregator did 3 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.03 ticks)
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 2 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 33 columns.
+MIP Presolve modified 9 coefficients.
+Reduced MIP has 4 rows, 6 columns, and 12 nonzeros.
+Reduced MIP has 2 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.03 ticks)
+Found incumbent of value 14.790000 after 0.00 sec. (0.05 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 4 rows, 6 columns, and 12 nonzeros.
+Reduced MIP has 2 binaries, 3 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           14.7900       17.0200        2   15.08%
+*     0+    0                           16.6350       17.0200        2    2.31%
+      0     0       17.0200     2       16.6350       17.0200        2    2.31%
+*     0     0      integral     0       17.0200       17.0200        3    0.00%
+Elapsed time = 0.00 sec. (0.10 ticks, tree = 0.00 MB, solutions = 3)
+ub: 17.02, lb: 15.05
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.10 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.10 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 38 rows and 84 columns.
+Aggregator did 2 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.03 ticks)
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 4 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 1 rows and 32 columns.
+MIP Presolve modified 19 coefficients.
+Reduced MIP has 5 rows, 7 columns, and 16 nonzeros.
+Reduced MIP has 2 binaries, 4 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.04 ticks)
+Found incumbent of value 14.790000 after 0.00 sec. (0.07 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 5 rows, 7 columns, and 16 nonzeros.
+Reduced MIP has 2 binaries, 4 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.00 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           14.7900       16.0700        0    8.65%
+*     0+    0                           16.0700       16.0700        0    0.00%
+      0     0        cutoff             16.0700       16.0700        0    0.00%
+      0     0        cutoff             16.0700       16.0700        0    0.00%
+Elapsed time = 0.00 sec. (0.10 ticks, tree = 0.00 MB, solutions = 2)
+ub: 16.07, lb: 16.069999999999993
+###################################
+k ... 33
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.10 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.10 ticks)
+solution = x* ... Any[18,1,32,2,16,11,21,7,9,25,10,26,29,34,35,19,17,8,22,6,24,4,37,3,28,5,38,20,23,13,36,33,30]
+model: PowerModels.GenericPowerModel{PowerModels.StandardDCPForm}, cut_type: DC, model_type: OPF
+total number of iterations ... 2
+solution cost ... 16.069999999999993
+computation time ... 0.238294153
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+WARNING: Ipopt finished with status Restoration_Failed
+WARNING: Not solved to optimality, status: Error
+WARNING: there was an issue with getsolvetime() on the solver, falling back on @timed.  This is not a rigorous timing value.
+full AC load shed ... NaN
+###################################
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+no start solution
+no start solution
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+Tried aggregator 1 time.
+QCP Presolve eliminated 41 rows and 100 columns.
+Aggregator did 3 substitutions.
+Reduced QCP has 114 rows, 64 columns, and 216 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.08 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 579
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 114
+  Integer space required    = 150
+  Total non-zeros in factor = 968
+  Total FP ops to factor    = 10492
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.8220000e+01   1.3100000e+01  3.06e+02  0.00e+00  1.13e+02  1.00e+00
+   1   1.6656351e+01   1.4991909e+01  3.06e+02  0.00e+00  1.13e+02  9.72e-01
+   2   1.5031695e+01   1.4613615e+01  1.35e+02  0.00e+00  4.95e+01  6.51e+00
+   3   1.4934167e+01   1.4854810e+01  2.86e+01  0.00e+00  1.05e+01  4.19e+01
+   4   1.5090850e+01   1.5043339e+01  5.17e+00  0.00e+00  1.90e+00  5.73e+01
+   5   1.5049155e+01   1.5047606e+01  3.25e+00  0.00e+00  1.19e+00  1.91e+03
+   6   1.5049653e+01   1.5049426e+01  1.04e-01  0.00e+00  3.81e-02  1.32e+04
+   7   1.5049953e+01   1.5049915e+01  1.52e-02  0.00e+00  5.57e-03  6.37e+04
+   8   1.5049985e+01   1.5049976e+01  2.68e-03  0.00e+00  9.82e-04  2.60e+05
+   9   1.5049996e+01   1.5049993e+01  6.55e-04  0.00e+00  2.41e-04  7.71e+05
+  10   1.5049998e+01   1.5049997e+01  2.15e-04  0.00e+00  7.89e-05  2.04e+06
+  11   1.5050000e+01   1.5049999e+01  8.09e-05  0.00e+00  2.97e-05  9.41e+06
+  12   1.5050000e+01   1.5050000e+01  1.73e-05  0.00e+00  6.36e-06  4.10e+07
+CPLEX Error  3003: Not a mixed-integer problem.
+Tried aggregator 1 time.
+MIP Presolve eliminated 2 rows and 39 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.01 ticks)
+ub: 16.861156813672135, lb: 15.049999912734938
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.02 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.02 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 44 rows and 96 columns.
+Aggregator did 3 substitutions.
+Reduced QCP has 120 rows, 73 columns, and 225 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 516
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 120
+  Integer space required    = 146
+  Total non-zeros in factor = 888
+  Total FP ops to factor    = 8118
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   2.0270000e+01   1.3300000e+01  4.34e+02  0.00e+00  1.18e+02  1.00e+00
+   1   1.7885918e+01   1.4933423e+01  4.34e+02  0.00e+00  1.18e+02  1.60e+00
+   2   1.5570466e+01   1.4920141e+01  1.95e+02  0.00e+00  5.31e+01  1.22e+01
+   3   1.4839105e+01   1.4656088e+01  3.98e+01  0.00e+00  1.09e+01  4.66e+01
+   4   1.4779439e+01   1.4700526e+01  1.11e+01  0.00e+00  3.04e+00  6.90e+01
+   5   1.4782915e+01   1.4744334e+01  5.09e+00  0.00e+00  1.39e+00  1.50e+02
+   6   1.4836254e+01   1.4804739e+01  2.46e+00  0.00e+00  6.72e-01  1.70e+02
+   7   1.4790191e+01   1.4788969e+01  2.04e+00  0.00e+00  5.55e-01  4.27e+03
+   8   1.4789994e+01   1.4789931e+01  7.92e-02  0.00e+00  2.16e-02  8.28e+04
+   9   1.4789999e+01   1.4789997e+01  4.12e-03  0.00e+00  1.12e-03  2.67e+06
+  10   1.4790000e+01   1.4790000e+01  1.19e-04  0.00e+00  3.25e-05  8.74e+07
+  11   1.4790000e+01   1.4790000e+01  3.61e-06  0.00e+00  9.84e-07  3.86e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 2 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 28 columns.
+MIP Presolve modified 15 coefficients.
+Reduced MIP has 4 rows, 11 columns, and 26 nonzeros.
+Reduced MIP has 8 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.04 ticks)
+Found incumbent of value 14.790000 after 0.00 sec. (0.07 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 4 rows, 11 columns, and 26 nonzeros.
+Reduced MIP has 8 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           14.7900       16.2916        0   10.15%
+*     0+    0                           15.0500       16.2916        0    8.25%
+*     0     0      integral     0       16.2916       16.2916        0    0.00%
+Elapsed time = 0.00 sec. (0.11 ticks, tree = 0.00 MB, solutions = 3)
+ub: 16.291638567029757, lb: 15.049999912734938
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.11 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.11 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 42 rows and 93 columns.
+Aggregator did 8 substitutions.
+Reduced QCP has 115 rows, 71 columns, and 214 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 457
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.02 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 115
+  Integer space required    = 129
+  Total non-zeros in factor = 791
+  Total FP ops to factor    = 6947
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.9720000e+01   1.6070000e+01  2.99e+02  0.00e+00  1.16e+02  1.00e+00
+   1   1.7379365e+01   1.6065105e+01  2.99e+02  0.00e+00  1.16e+02  1.19e+00
+   2   1.6059147e+01   1.5743221e+01  1.38e+02  0.00e+00  5.37e+01  1.00e+01
+   3   1.5441828e+01   1.5389859e+01  2.67e+01  0.00e+00  1.04e+01  6.34e+01
+   4   1.5557342e+01   1.5512196e+01  4.35e+00  0.00e+00  1.69e+00  6.71e+01
+   5   1.5523848e+01   1.5519398e+01  3.86e+00  0.00e+00  1.50e+00  6.06e+02
+   6   1.5520361e+01   1.5519289e+01  3.92e-01  0.00e+00  1.52e-01  2.46e+03
+   7   1.5521458e+01   1.5521147e+01  9.50e-02  0.00e+00  3.69e-02  7.20e+03
+   8   1.5521452e+01   1.5521413e+01  2.89e-02  0.00e+00  1.12e-02  5.76e+04
+   9   1.5521372e+01   1.5521368e+01  3.60e-03  0.00e+00  1.40e-03  5.13e+05
+  10   1.5521373e+01   1.5521371e+01  3.95e-04  0.00e+00  1.53e-04  1.17e+06
+  11   1.5521372e+01   1.5521372e+01  1.69e-04  0.00e+00  6.58e-05  7.83e+07
+  12   1.5521372e+01   1.5521372e+01  2.53e-06  0.00e+00  9.82e-07  2.14e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+1 of 4 MIP starts provided solutions.
+MIP start 'm2' defined initial solution with objective 15.0500.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 23 columns.
+MIP Presolve modified 40 coefficients.
+Reduced MIP has 6 rows, 16 columns, and 42 nonzeros.
+Reduced MIP has 13 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.06 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 6 rows, 16 columns, and 42 nonzeros.
+Reduced MIP has 13 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.02 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           15.0500       16.2904        0    8.24%
+*     0     0      integral     0       16.2904       16.2904        0    0.00%
+Elapsed time = 0.00 sec. (0.15 ticks, tree = 0.00 MB, solutions = 1)
+ub: 16.290351339980518, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.15 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.15 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 36 rows and 90 columns.
+Aggregator did 6 substitutions.
+Reduced QCP has 134 rows, 78 columns, and 246 nonzeros.
+Reduced QCP has 15 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 594
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 134
+  Integer space required    = 168
+  Total non-zeros in factor = 942
+  Total FP ops to factor    = 8010
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.9120000e+01   1.6070000e+01  3.81e+02  0.00e+00  1.32e+02  1.00e+00
+   1   1.7020847e+01   1.5874855e+01  3.81e+02  0.00e+00  1.32e+02  1.22e+00
+   2   1.5063233e+01   1.4766013e+01  1.85e+02  0.00e+00  6.43e+01  1.08e+01
+   3   1.3543233e+01   1.3456138e+01  3.67e+01  0.00e+00  1.27e+01  3.60e+01
+   4   1.3444318e+01   1.3431223e+01  1.08e+01  0.00e+00  3.75e+00  1.51e+02
+   5   1.3387108e+01   1.3386066e+01  1.86e+00  0.00e+00  6.44e-01  2.05e+03
+   6   1.3384788e+01   1.3384782e+01  1.44e-01  0.00e+00  5.00e-02  3.29e+05
+   7   1.3384777e+01   1.3384777e+01  8.43e-04  0.00e+00  2.93e-04  3.51e+07
+   8   1.3384777e+01   1.3384777e+01  7.91e-06  0.00e+00  2.74e-06  2.48e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 18 columns.
+MIP Presolve modified 75 coefficients.
+Reduced MIP has 8 rows, 21 columns, and 58 nonzeros.
+Reduced MIP has 18 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.09 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.14 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 8 rows, 21 columns, and 58 nonzeros.
+Reduced MIP has 18 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.03 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.2904        0   21.71%
+*     0+    0                           16.2904       16.2904        0    0.00%
+      0     0        cutoff             16.2904       16.2904        0    0.00%
+      0     0        cutoff             16.2904       16.2904        0    0.00%
+Elapsed time = 0.00 sec. (0.24 ticks, tree = 0.00 MB, solutions = 2)
+ub: 16.290351339980518, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.24 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.24 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 38 rows and 90 columns.
+Aggregator did 6 substitutions.
+Reduced QCP has 129 rows, 77 columns, and 238 nonzeros.
+Reduced QCP has 14 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 528
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 129
+  Integer space required    = 147
+  Total non-zeros in factor = 854
+  Total FP ops to factor    = 6930
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   2.1870000e+01   1.5050000e+01  4.26e+02  0.00e+00  1.34e+02  1.00e+00
+   1   1.8373412e+01   1.5943810e+01  4.26e+02  0.00e+00  1.34e+02  1.00e+00
+   2   1.6700641e+01   1.6061038e+01  1.87e+02  0.00e+00  5.85e+01  6.81e+00
+   3   1.5480570e+01   1.5357121e+01  4.28e+01  0.00e+00  1.34e+01  4.31e+01
+   4   1.5349653e+01   1.5293843e+01  7.99e+00  0.00e+00  2.51e+00  8.71e+01
+   5   1.5377437e+01   1.5326172e+01  3.66e+00  0.00e+00  1.15e+00  9.80e+01
+   6   1.5378267e+01   1.5331290e+01  3.35e+00  0.00e+00  1.05e+00  1.02e+02
+   7   1.5412273e+01   1.5369131e+01  3.09e+00  0.00e+00  9.71e-01  1.12e+02
+   8   1.5412000e+01   1.5374647e+01  2.84e+00  0.00e+00  8.90e-01  1.20e+02
+   9   1.5426454e+01   1.5392495e+01  2.49e+00  0.00e+00  7.80e-01  1.33e+02
+  10   1.5521012e+01   1.5489340e+01  2.26e+00  0.00e+00  7.09e-01  1.30e+02
+  11   1.5521836e+01   1.5517819e+01  2.14e+00  0.00e+00  6.72e-01  9.90e+02
+  12   1.5519980e+01   1.5519481e+01  2.74e-01  0.00e+00  8.59e-02  7.85e+03
+  13   1.5520423e+01   1.5520077e+01  3.41e-02  0.00e+00  1.07e-02  1.07e+04
+  14   1.5520624e+01   1.5520597e+01  2.40e-02  0.00e+00  7.52e-03  1.34e+05
+  15   1.5520603e+01   1.5520601e+01  1.90e-03  0.00e+00  5.96e-04  1.71e+06
+  16   1.5520603e+01   1.5520603e+01  1.43e-04  0.00e+00  4.50e-05  1.16e+07
+  17   1.5520604e+01   1.5520603e+01  2.05e-05  0.00e+00  6.43e-06  4.84e+07
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 13 columns.
+MIP Presolve modified 120 coefficients.
+Reduced MIP has 10 rows, 26 columns, and 74 nonzeros.
+Reduced MIP has 23 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.13 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.18 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 10 rows, 26 columns, and 74 nonzeros.
+Reduced MIP has 23 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.04 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.2904        0   21.71%
+*     0+    0                           16.2904       16.2904        0    0.00%
+      0     0        cutoff             16.2904       16.2904        0    0.00%
+      0     0        cutoff             16.2904       16.2904        0    0.00%
+Elapsed time = 0.00 sec. (0.31 ticks, tree = 0.00 MB, solutions = 2)
+ub: 16.290351339980518, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.31 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.31 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 42 rows and 98 columns.
+Aggregator did 4 substitutions.
+Reduced QCP has 118 rows, 70 columns, and 222 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 521
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 118
+  Integer space required    = 148
+  Total non-zeros in factor = 913
+  Total FP ops to factor    = 8873
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.8040000e+01   1.4260000e+01  3.46e+02  0.00e+00  1.14e+02  1.00e+00
+   1   1.6926809e+01   1.5837488e+01  3.46e+02  0.00e+00  1.14e+02  1.01e+00
+   2   1.5739423e+01   1.5385069e+01  1.50e+02  0.00e+00  4.96e+01  7.86e+00
+   3   1.4784106e+01   1.4704654e+01  3.49e+01  0.00e+00  1.15e+01  3.85e+01
+   4   1.4708349e+01   1.4686947e+01  7.64e+00  0.00e+00  2.52e+00  1.26e+02
+   5   1.4711920e+01   1.4698081e+01  2.12e+00  0.00e+00  7.00e-01  1.50e+02
+   6   1.4753544e+01   1.4747513e+01  1.49e+00  0.00e+00  4.91e-01  3.23e+02
+   7   1.4781566e+01   1.4780995e+01  6.62e-01  0.00e+00  2.18e-01  4.63e+03
+   8   1.4780861e+01   1.4780824e+01  5.71e-02  0.00e+00  1.88e-02  7.01e+04
+   9   1.4780831e+01   1.4780815e+01  3.71e-03  0.00e+00  1.22e-03  1.32e+05
+  10   1.4780847e+01   1.4780839e+01  1.71e-03  0.00e+00  5.63e-04  2.39e+05
+  11   1.4780852e+01   1.4780850e+01  8.88e-04  0.00e+00  2.93e-04  8.26e+05
+  12   1.4780858e+01   1.4780857e+01  2.54e-04  0.00e+00  8.38e-05  1.94e+06
+  13   1.4780860e+01   1.4780860e+01  1.07e-04  0.00e+00  3.52e-05  5.60e+06
+  14   1.4780861e+01   1.4780861e+01  3.55e-05  0.00e+00  1.17e-05  7.14e+07
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 8 columns.
+MIP Presolve modified 176 coefficients.
+Reduced MIP has 12 rows, 31 columns, and 90 nonzeros.
+Reduced MIP has 28 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.19 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.24 ticks)
+Probing time = 0.00 sec. (0.02 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 12 rows, 31 columns, and 90 nonzeros.
+Reduced MIP has 28 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.05 ticks)
+Probing time = 0.00 sec. (0.02 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.02 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.2274        0   21.24%
+*     0+    0                           16.2274       16.2274        0    0.00%
+      0     0        cutoff             16.2274       16.2274        0    0.00%
+      0     0        cutoff             16.2274       16.2274        0    0.00%
+Elapsed time = 0.00 sec. (0.40 ticks, tree = 0.00 MB, solutions = 2)
+ub: 16.22744472461971, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.40 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.40 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 38 rows and 93 columns.
+Aggregator did 5 substitutions.
+Reduced QCP has 128 rows, 75 columns, and 238 nonzeros.
+Reduced QCP has 14 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 566
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 128
+  Integer space required    = 158
+  Total non-zeros in factor = 968
+  Total FP ops to factor    = 9020
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   2.1730000e+01   1.4120000e+01  2.92e+02  0.00e+00  1.28e+02  1.00e+00
+   1   1.8906580e+01   1.4665052e+01  2.92e+02  0.00e+00  1.28e+02  1.75e+00
+   2   1.5875499e+01   1.4306886e+01  1.63e+02  0.00e+00  7.18e+01  4.98e+00
+   3   1.4242583e+01   1.3734852e+01  6.00e+01  0.00e+00  2.64e+01  1.74e+01
+   4   1.3726895e+01   1.3528041e+01  1.92e+01  0.00e+00  8.43e+00  4.26e+01
+   5   1.3764509e+01   1.3630370e+01  7.54e+00  0.00e+00  3.32e+00  5.57e+01
+   6   1.3811528e+01   1.3746681e+01  5.16e+00  0.00e+00  2.27e+00  8.96e+01
+   7   1.3761076e+01   1.3741557e+01  2.58e+00  0.00e+00  1.13e+00  2.79e+02
+   8   1.3773435e+01   1.3757337e+01  7.83e-01  0.00e+00  3.45e-01  3.53e+02
+   9   1.3804204e+01   1.3794340e+01  6.42e-01  0.00e+00  2.82e-01  5.40e+02
+  10   1.3806213e+01   1.3805846e+01  3.97e-01  0.00e+00  1.75e-01  1.48e+04
+  11   1.3806432e+01   1.3806414e+01  1.47e-02  0.00e+00  6.48e-03  2.64e+05
+  12   1.3806474e+01   1.3806472e+01  7.43e-04  0.00e+00  3.27e-04  2.77e+06
+  13   1.3806479e+01   1.3806479e+01  7.09e-05  0.00e+00  3.12e-05  5.03e+07
+  14   1.3806479e+01   1.3806479e+01  3.87e-06  0.00e+00  1.70e-06  1.55e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 3 columns.
+MIP Presolve modified 241 coefficients.
+Reduced MIP has 14 rows, 36 columns, and 106 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.15 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.21 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 14 rows, 36 columns, and 106 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.05 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.05 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.2274       30   21.24%
+*     0+    0                           15.4822       16.2274       30    4.81%
+*     0     0      integral     0       16.2274       16.2274       30    0.00%
+Elapsed time = 0.00 sec. (0.38 ticks, tree = 0.00 MB, solutions = 3)
+ub: 16.22744472461971, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.39 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.39 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 49 rows and 107 columns.
+Aggregator did 3 substitutions.
+Reduced QCP has 98 rows, 60 columns, and 192 nonzeros.
+Reduced QCP has 11 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 477
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.02 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 98
+  Integer space required    = 128
+  Total non-zeros in factor = 710
+  Total FP ops to factor    = 6112
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.8220000e+01   1.3300000e+01  2.24e+02  0.00e+00  9.25e+01  1.00e+00
+   1   1.7326853e+01   1.5636721e+01  2.24e+02  0.00e+00  9.25e+01  1.27e+00
+   2   1.6299191e+01   1.5850808e+01  9.36e+01  0.00e+00  3.87e+01  1.01e+01
+   3   1.6001087e+01   1.5870494e+01  2.07e+01  0.00e+00  8.55e+00  3.75e+01
+   4   1.6003272e+01   1.5948529e+01  5.95e+00  0.00e+00  2.46e+00  6.20e+01
+   5   1.6031781e+01   1.5999716e+01  2.68e+00  0.00e+00  1.11e+00  1.18e+02
+   6   1.6094332e+01   1.6065865e+01  1.53e+00  0.00e+00  6.33e-01  1.22e+02
+   7   1.6070662e+01   1.6069206e+01  1.39e+00  0.00e+00  5.73e-01  2.31e+03
+   8   1.6069994e+01   1.6069962e+01  7.14e-02  0.00e+00  2.95e-02  1.06e+05
+   9   1.6069997e+01   1.6069995e+01  1.58e-03  0.00e+00  6.52e-04  1.56e+06
+  10   1.6070000e+01   1.6069999e+01  1.03e-04  0.00e+00  4.24e-05  1.34e+07
+  11   1.6070000e+01   1.6070000e+01  1.15e-05  0.00e+00  4.76e-06  1.30e+08
+CPLEX Error  3003: Not a mixed-integer problem.
+1 of 4 MIP starts provided solutions.
+MIP start 'm2' defined initial solution with objective 15.4822.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 3 columns.
+MIP Presolve modified 282 coefficients.
+Reduced MIP has 16 rows, 36 columns, and 117 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.16 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 16 rows, 36 columns, and 117 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.06 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.05 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           15.4822       16.1430       31    4.27%
+      0     0       16.1430     2       15.4822       16.1430       31    4.27%
+*     0     0      integral     0       16.1430       16.1430       32    0.00%
+Elapsed time = 0.00 sec. (0.41 ticks, tree = 0.00 MB, solutions = 1)
+ub: 16.142965578600187, lb: 16.069999960714313
+###################################
+k ... 33
+solution = x* ... Any[18,1,32,2,16,11,21,7,9,25,10,26,29,34,35,19,17,8,22,6,24,4,37,3,28,5,38,20,23,13,36,33,30]
+model: PowerModels.GenericPowerModel{PowerModels.SOCWRForm}, cut_type: DC, model_type: OPF
+total number of iterations ... 7
+solution cost ... 16.069999960714313
+computation time ... 0.176709879
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.41 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.41 ticks)
+WARNING: Ipopt finished with status Restoration_Failed
+WARNING: Not solved to optimality, status: Error
+WARNING: there was an issue with getsolvetime() on the solver, falling back on @timed.  This is not a rigorous timing value.
+full AC load shed ... NaN
+###################################
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+no start solution
+no start solution
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+Tried aggregator 1 time.
+QCP Presolve eliminated 41 rows and 100 columns.
+Aggregator did 3 substitutions.
+Reduced QCP has 114 rows, 64 columns, and 216 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.08 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 579
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 114
+  Integer space required    = 150
+  Total non-zeros in factor = 968
+  Total FP ops to factor    = 10492
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.8220000e+01   1.3100000e+01  3.06e+02  0.00e+00  1.13e+02  1.00e+00
+   1   1.6656351e+01   1.4991909e+01  3.06e+02  0.00e+00  1.13e+02  9.72e-01
+   2   1.5031695e+01   1.4613615e+01  1.35e+02  0.00e+00  4.95e+01  6.51e+00
+   3   1.4934167e+01   1.4854810e+01  2.86e+01  0.00e+00  1.05e+01  4.19e+01
+   4   1.5090850e+01   1.5043339e+01  5.17e+00  0.00e+00  1.90e+00  5.73e+01
+   5   1.5049155e+01   1.5047606e+01  3.25e+00  0.00e+00  1.19e+00  1.91e+03
+   6   1.5049653e+01   1.5049426e+01  1.04e-01  0.00e+00  3.81e-02  1.32e+04
+   7   1.5049953e+01   1.5049915e+01  1.52e-02  0.00e+00  5.57e-03  6.37e+04
+   8   1.5049985e+01   1.5049976e+01  2.68e-03  0.00e+00  9.82e-04  2.60e+05
+   9   1.5049996e+01   1.5049993e+01  6.55e-04  0.00e+00  2.41e-04  7.71e+05
+  10   1.5049998e+01   1.5049997e+01  2.15e-04  0.00e+00  7.89e-05  2.04e+06
+  11   1.5050000e+01   1.5049999e+01  8.09e-05  0.00e+00  2.97e-05  9.41e+06
+  12   1.5050000e+01   1.5050000e+01  1.73e-05  0.00e+00  6.36e-06  4.10e+07
+CPLEX Error  3003: Not a mixed-integer problem.
+Tried aggregator 1 time.
+MIP Presolve eliminated 2 rows and 39 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.01 ticks)
+ub: 16.861157797813302, lb: 15.049999912734938
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.02 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.02 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 44 rows and 96 columns.
+Aggregator did 3 substitutions.
+Reduced QCP has 120 rows, 73 columns, and 225 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 516
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 120
+  Integer space required    = 146
+  Total non-zeros in factor = 888
+  Total FP ops to factor    = 8118
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   2.0270000e+01   1.3300000e+01  4.34e+02  0.00e+00  1.18e+02  1.00e+00
+   1   1.7885918e+01   1.4933423e+01  4.34e+02  0.00e+00  1.18e+02  1.60e+00
+   2   1.5570466e+01   1.4920141e+01  1.95e+02  0.00e+00  5.31e+01  1.22e+01
+   3   1.4839105e+01   1.4656088e+01  3.98e+01  0.00e+00  1.09e+01  4.66e+01
+   4   1.4779439e+01   1.4700526e+01  1.11e+01  0.00e+00  3.04e+00  6.90e+01
+   5   1.4782915e+01   1.4744334e+01  5.09e+00  0.00e+00  1.39e+00  1.50e+02
+   6   1.4836254e+01   1.4804739e+01  2.46e+00  0.00e+00  6.72e-01  1.70e+02
+   7   1.4790191e+01   1.4788969e+01  2.04e+00  0.00e+00  5.55e-01  4.27e+03
+   8   1.4789994e+01   1.4789931e+01  7.92e-02  0.00e+00  2.16e-02  8.28e+04
+   9   1.4789999e+01   1.4789997e+01  4.12e-03  0.00e+00  1.12e-03  2.67e+06
+  10   1.4790000e+01   1.4790000e+01  1.19e-04  0.00e+00  3.25e-05  8.74e+07
+  11   1.4790000e+01   1.4790000e+01  3.61e-06  0.00e+00  9.84e-07  3.86e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 2 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 28 columns.
+MIP Presolve modified 15 coefficients.
+Reduced MIP has 4 rows, 11 columns, and 26 nonzeros.
+Reduced MIP has 8 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.04 ticks)
+Found incumbent of value 14.790000 after 0.00 sec. (0.07 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 4 rows, 11 columns, and 26 nonzeros.
+Reduced MIP has 8 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Probing time = 0.00 sec. (0.00 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           14.7900       16.4790        0   11.42%
+*     0+    0                           15.0500       16.4790        0    9.50%
+*     0     0      integral     0       16.4790       16.4790        0    0.00%
+Elapsed time = 0.00 sec. (0.11 ticks, tree = 0.00 MB, solutions = 3)
+ub: 16.479013786575894, lb: 15.049999912734938
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.11 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.11 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 42 rows and 93 columns.
+Aggregator did 8 substitutions.
+Reduced QCP has 115 rows, 71 columns, and 214 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 457
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.02 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 115
+  Integer space required    = 129
+  Total non-zeros in factor = 791
+  Total FP ops to factor    = 6947
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.9720000e+01   1.6070000e+01  2.99e+02  0.00e+00  1.16e+02  1.00e+00
+   1   1.7379365e+01   1.6065105e+01  2.99e+02  0.00e+00  1.16e+02  1.19e+00
+   2   1.6059147e+01   1.5743221e+01  1.38e+02  0.00e+00  5.37e+01  1.00e+01
+   3   1.5441828e+01   1.5389859e+01  2.67e+01  0.00e+00  1.04e+01  6.34e+01
+   4   1.5557342e+01   1.5512196e+01  4.35e+00  0.00e+00  1.69e+00  6.71e+01
+   5   1.5523848e+01   1.5519398e+01  3.86e+00  0.00e+00  1.50e+00  6.06e+02
+   6   1.5520361e+01   1.5519289e+01  3.92e-01  0.00e+00  1.52e-01  2.46e+03
+   7   1.5521458e+01   1.5521147e+01  9.50e-02  0.00e+00  3.69e-02  7.20e+03
+   8   1.5521452e+01   1.5521413e+01  2.89e-02  0.00e+00  1.12e-02  5.76e+04
+   9   1.5521372e+01   1.5521368e+01  3.60e-03  0.00e+00  1.40e-03  5.13e+05
+  10   1.5521373e+01   1.5521371e+01  3.95e-04  0.00e+00  1.53e-04  1.17e+06
+  11   1.5521372e+01   1.5521372e+01  1.69e-04  0.00e+00  6.58e-05  7.83e+07
+  12   1.5521372e+01   1.5521372e+01  2.53e-06  0.00e+00  9.82e-07  2.14e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+1 of 4 MIP starts provided solutions.
+MIP start 'm2' defined initial solution with objective 15.0500.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 23 columns.
+MIP Presolve modified 41 coefficients.
+Reduced MIP has 6 rows, 16 columns, and 42 nonzeros.
+Reduced MIP has 13 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.06 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 6 rows, 16 columns, and 42 nonzeros.
+Reduced MIP has 13 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.02 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           15.0500       16.4790        0    9.50%
+*     0     0      integral     0       16.4790       16.4790        0    0.00%
+Elapsed time = 0.00 sec. (0.15 ticks, tree = 0.00 MB, solutions = 1)
+ub: 16.479013786575894, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.15 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.15 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 36 rows and 90 columns.
+Aggregator did 6 substitutions.
+Reduced QCP has 134 rows, 78 columns, and 246 nonzeros.
+Reduced QCP has 15 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 594
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 134
+  Integer space required    = 168
+  Total non-zeros in factor = 942
+  Total FP ops to factor    = 8010
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.9120000e+01   1.6070000e+01  3.81e+02  0.00e+00  1.32e+02  1.00e+00
+   1   1.7020847e+01   1.5874855e+01  3.81e+02  0.00e+00  1.32e+02  1.22e+00
+   2   1.5063233e+01   1.4766013e+01  1.85e+02  0.00e+00  6.43e+01  1.08e+01
+   3   1.3543233e+01   1.3456138e+01  3.67e+01  0.00e+00  1.27e+01  3.60e+01
+   4   1.3444318e+01   1.3431223e+01  1.08e+01  0.00e+00  3.75e+00  1.51e+02
+   5   1.3387108e+01   1.3386066e+01  1.86e+00  0.00e+00  6.44e-01  2.05e+03
+   6   1.3384788e+01   1.3384782e+01  1.44e-01  0.00e+00  5.00e-02  3.29e+05
+   7   1.3384777e+01   1.3384777e+01  8.43e-04  0.00e+00  2.93e-04  3.51e+07
+   8   1.3384777e+01   1.3384777e+01  7.91e-06  0.00e+00  2.74e-06  2.48e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 18 columns.
+MIP Presolve modified 76 coefficients.
+Reduced MIP has 8 rows, 21 columns, and 58 nonzeros.
+Reduced MIP has 18 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.09 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.14 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 8 rows, 21 columns, and 58 nonzeros.
+Reduced MIP has 18 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.03 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.4790        0   23.12%
+*     0+    0                           16.4790       16.4790        0    0.00%
+      0     0        cutoff             16.4790       16.4790        0    0.00%
+      0     0        cutoff             16.4790       16.4790        0    0.00%
+Elapsed time = 0.00 sec. (0.23 ticks, tree = 0.00 MB, solutions = 2)
+ub: 16.479013786575894, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.24 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.24 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 38 rows and 90 columns.
+Aggregator did 6 substitutions.
+Reduced QCP has 129 rows, 77 columns, and 238 nonzeros.
+Reduced QCP has 14 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 528
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 129
+  Integer space required    = 147
+  Total non-zeros in factor = 854
+  Total FP ops to factor    = 6930
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   2.1870000e+01   1.5050000e+01  4.26e+02  0.00e+00  1.34e+02  1.00e+00
+   1   1.8373412e+01   1.5943810e+01  4.26e+02  0.00e+00  1.34e+02  1.00e+00
+   2   1.6700641e+01   1.6061038e+01  1.87e+02  0.00e+00  5.85e+01  6.81e+00
+   3   1.5480570e+01   1.5357121e+01  4.28e+01  0.00e+00  1.34e+01  4.31e+01
+   4   1.5349653e+01   1.5293843e+01  7.99e+00  0.00e+00  2.51e+00  8.71e+01
+   5   1.5377437e+01   1.5326172e+01  3.66e+00  0.00e+00  1.15e+00  9.80e+01
+   6   1.5378267e+01   1.5331290e+01  3.35e+00  0.00e+00  1.05e+00  1.02e+02
+   7   1.5412273e+01   1.5369131e+01  3.09e+00  0.00e+00  9.71e-01  1.12e+02
+   8   1.5412000e+01   1.5374647e+01  2.84e+00  0.00e+00  8.90e-01  1.20e+02
+   9   1.5426454e+01   1.5392495e+01  2.49e+00  0.00e+00  7.80e-01  1.33e+02
+  10   1.5521012e+01   1.5489340e+01  2.26e+00  0.00e+00  7.09e-01  1.30e+02
+  11   1.5521836e+01   1.5517819e+01  2.14e+00  0.00e+00  6.72e-01  9.90e+02
+  12   1.5519980e+01   1.5519481e+01  2.74e-01  0.00e+00  8.59e-02  7.85e+03
+  13   1.5520423e+01   1.5520077e+01  3.41e-02  0.00e+00  1.07e-02  1.07e+04
+  14   1.5520624e+01   1.5520597e+01  2.40e-02  0.00e+00  7.52e-03  1.34e+05
+  15   1.5520603e+01   1.5520601e+01  1.90e-03  0.00e+00  5.96e-04  1.71e+06
+  16   1.5520603e+01   1.5520603e+01  1.43e-04  0.00e+00  4.50e-05  1.16e+07
+  17   1.5520604e+01   1.5520603e+01  2.05e-05  0.00e+00  6.43e-06  4.84e+07
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 13 columns.
+MIP Presolve modified 121 coefficients.
+Reduced MIP has 10 rows, 26 columns, and 74 nonzeros.
+Reduced MIP has 23 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.13 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.18 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 10 rows, 26 columns, and 74 nonzeros.
+Reduced MIP has 23 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.04 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.01 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.4790        0   23.12%
+*     0+    0                           16.4790       16.4790        0    0.00%
+      0     0        cutoff             16.4790       16.4790        0    0.00%
+      0     0        cutoff             16.4790       16.4790        0    0.00%
+Elapsed time = 0.00 sec. (0.31 ticks, tree = 0.00 MB, solutions = 2)
+ub: 16.479013786575894, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.31 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.31 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 42 rows and 98 columns.
+Aggregator did 4 substitutions.
+Reduced QCP has 118 rows, 70 columns, and 222 nonzeros.
+Reduced QCP has 13 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 521
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 118
+  Integer space required    = 148
+  Total non-zeros in factor = 913
+  Total FP ops to factor    = 8873
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.8040000e+01   1.4260000e+01  3.46e+02  0.00e+00  1.14e+02  1.00e+00
+   1   1.6926809e+01   1.5837488e+01  3.46e+02  0.00e+00  1.14e+02  1.01e+00
+   2   1.5739423e+01   1.5385069e+01  1.50e+02  0.00e+00  4.96e+01  7.86e+00
+   3   1.4784106e+01   1.4704654e+01  3.49e+01  0.00e+00  1.15e+01  3.85e+01
+   4   1.4708349e+01   1.4686947e+01  7.64e+00  0.00e+00  2.52e+00  1.26e+02
+   5   1.4711920e+01   1.4698081e+01  2.12e+00  0.00e+00  7.00e-01  1.50e+02
+   6   1.4753544e+01   1.4747513e+01  1.49e+00  0.00e+00  4.91e-01  3.23e+02
+   7   1.4781566e+01   1.4780995e+01  6.62e-01  0.00e+00  2.18e-01  4.63e+03
+   8   1.4780861e+01   1.4780824e+01  5.71e-02  0.00e+00  1.88e-02  7.01e+04
+   9   1.4780831e+01   1.4780815e+01  3.71e-03  0.00e+00  1.22e-03  1.32e+05
+  10   1.4780847e+01   1.4780839e+01  1.71e-03  0.00e+00  5.63e-04  2.39e+05
+  11   1.4780852e+01   1.4780850e+01  8.88e-04  0.00e+00  2.93e-04  8.26e+05
+  12   1.4780858e+01   1.4780857e+01  2.54e-04  0.00e+00  8.38e-05  1.94e+06
+  13   1.4780860e+01   1.4780860e+01  1.07e-04  0.00e+00  3.52e-05  5.60e+06
+  14   1.4780861e+01   1.4780861e+01  3.55e-05  0.00e+00  1.17e-05  7.14e+07
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 8 columns.
+MIP Presolve modified 176 coefficients.
+Reduced MIP has 12 rows, 31 columns, and 90 nonzeros.
+Reduced MIP has 28 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.19 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.24 ticks)
+Probing time = 0.00 sec. (0.02 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 12 rows, 31 columns, and 90 nonzeros.
+Reduced MIP has 28 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.05 ticks)
+Probing time = 0.00 sec. (0.02 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.02 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.4790        0   23.12%
+*     0+    0                           16.4790       16.4790        0    0.00%
+      0     0        cutoff             16.4790       16.4790        0    0.00%
+      0     0        cutoff             16.4790       16.4790        0    0.00%
+Elapsed time = 0.00 sec. (0.40 ticks, tree = 0.00 MB, solutions = 2)
+ub: 16.479013786575894, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.40 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.40 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 38 rows and 93 columns.
+Aggregator did 5 substitutions.
+Reduced QCP has 128 rows, 75 columns, and 238 nonzeros.
+Reduced QCP has 14 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 566
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 128
+  Integer space required    = 158
+  Total non-zeros in factor = 968
+  Total FP ops to factor    = 9020
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   2.1730000e+01   1.4120000e+01  2.92e+02  0.00e+00  1.28e+02  1.00e+00
+   1   1.8906580e+01   1.4665052e+01  2.92e+02  0.00e+00  1.28e+02  1.75e+00
+   2   1.5875499e+01   1.4306886e+01  1.63e+02  0.00e+00  7.18e+01  4.98e+00
+   3   1.4242583e+01   1.3734852e+01  6.00e+01  0.00e+00  2.64e+01  1.74e+01
+   4   1.3726895e+01   1.3528041e+01  1.92e+01  0.00e+00  8.43e+00  4.26e+01
+   5   1.3764509e+01   1.3630370e+01  7.54e+00  0.00e+00  3.32e+00  5.57e+01
+   6   1.3811528e+01   1.3746681e+01  5.16e+00  0.00e+00  2.27e+00  8.96e+01
+   7   1.3761076e+01   1.3741557e+01  2.58e+00  0.00e+00  1.13e+00  2.79e+02
+   8   1.3773435e+01   1.3757337e+01  7.83e-01  0.00e+00  3.45e-01  3.53e+02
+   9   1.3804204e+01   1.3794340e+01  6.42e-01  0.00e+00  2.82e-01  5.40e+02
+  10   1.3806213e+01   1.3805846e+01  3.97e-01  0.00e+00  1.75e-01  1.48e+04
+  11   1.3806432e+01   1.3806414e+01  1.47e-02  0.00e+00  6.48e-03  2.64e+05
+  12   1.3806474e+01   1.3806472e+01  7.43e-04  0.00e+00  3.27e-04  2.77e+06
+  13   1.3806479e+01   1.3806479e+01  7.09e-05  0.00e+00  3.12e-05  5.03e+07
+  14   1.3806479e+01   1.3806479e+01  3.87e-06  0.00e+00  1.70e-06  1.55e+09
+CPLEX Error  3003: Not a mixed-integer problem.
+Warning:  No solution found from 3 MIP starts.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 3 columns.
+MIP Presolve modified 241 coefficients.
+Reduced MIP has 14 rows, 36 columns, and 106 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.14 ticks)
+Found incumbent of value 13.384777 after 0.00 sec. (0.21 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 14 rows, 36 columns, and 106 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.05 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.05 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           13.3848       16.4790       29   23.12%
+*     0+    0                           15.4822       16.4790       29    6.44%
+*     0     0      integral     0       16.4790       16.4790       29    0.00%
+Elapsed time = 0.00 sec. (0.38 ticks, tree = 0.00 MB, solutions = 3)
+ub: 16.479013786575894, lb: 15.521371880972858
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.38 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.38 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 49 rows and 107 columns.
+Aggregator did 3 substitutions.
+Reduced QCP has 98 rows, 60 columns, and 192 nonzeros.
+Reduced QCP has 11 quadratic constraints.
+Presolve time = 0.00 sec. (0.09 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 477
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.02 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 98
+  Integer space required    = 128
+  Total non-zeros in factor = 710
+  Total FP ops to factor    = 6112
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.8220000e+01   1.3300000e+01  2.24e+02  0.00e+00  9.25e+01  1.00e+00
+   1   1.7326853e+01   1.5636721e+01  2.24e+02  0.00e+00  9.25e+01  1.27e+00
+   2   1.6299191e+01   1.5850808e+01  9.36e+01  0.00e+00  3.87e+01  1.01e+01
+   3   1.6001087e+01   1.5870494e+01  2.07e+01  0.00e+00  8.55e+00  3.75e+01
+   4   1.6003272e+01   1.5948529e+01  5.95e+00  0.00e+00  2.46e+00  6.20e+01
+   5   1.6031781e+01   1.5999716e+01  2.68e+00  0.00e+00  1.11e+00  1.18e+02
+   6   1.6094332e+01   1.6065865e+01  1.53e+00  0.00e+00  6.33e-01  1.22e+02
+   7   1.6070662e+01   1.6069206e+01  1.39e+00  0.00e+00  5.73e-01  2.31e+03
+   8   1.6069994e+01   1.6069962e+01  7.14e-02  0.00e+00  2.95e-02  1.06e+05
+   9   1.6069997e+01   1.6069995e+01  1.58e-03  0.00e+00  6.52e-04  1.56e+06
+  10   1.6070000e+01   1.6069999e+01  1.03e-04  0.00e+00  4.24e-05  1.34e+07
+  11   1.6070000e+01   1.6070000e+01  1.15e-05  0.00e+00  4.76e-06  1.30e+08
+CPLEX Error  3003: Not a mixed-integer problem.
+1 of 4 MIP starts provided solutions.
+MIP start 'm2' defined initial solution with objective 15.4822.
+Retaining values of one MIP start for possible repair.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 3 columns.
+MIP Presolve modified 282 coefficients.
+Reduced MIP has 16 rows, 36 columns, and 117 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.16 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 16 rows, 36 columns, and 117 nonzeros.
+Reduced MIP has 33 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.06 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.05 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           15.4822       16.4790       31    6.44%
+*     0     0      integral     0       16.4790       16.4790       31    0.00%
+Elapsed time = 0.00 sec. (0.39 ticks, tree = 0.00 MB, solutions = 1)
+ub: 16.479013786575894, lb: 16.069999960714313
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.39 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.39 ticks)
+Tried aggregator 1 time.
+QCP Presolve eliminated 47 rows and 107 columns.
+Aggregator did 1 substitutions.
+Reduced QCP has 107 rows, 63 columns, and 209 nonzeros.
+Reduced QCP has 12 quadratic constraints.
+Presolve time = 0.00 sec. (0.08 ticks)
+Parallel mode: using up to 32 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 561
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.03 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 32
+  Rows in Factor            = 107
+  Integer space required    = 147
+  Total non-zeros in factor = 877
+  Total FP ops to factor    = 8677
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   1.8220000e+01   1.1590000e+01  2.22e+02  0.00e+00  1.01e+02  1.00e+00
+   1   1.7294333e+01   1.4912597e+01  2.22e+02  0.00e+00  1.01e+02  1.48e+00
+   2   1.6202193e+01   1.5680052e+01  8.89e+01  0.00e+00  4.03e+01  1.41e+01
+   3   1.5991060e+01   1.5821677e+01  1.73e+01  0.00e+00  7.82e+00  3.94e+01
+   4   1.5964791e+01   1.5885607e+01  5.66e+00  0.00e+00  2.57e+00  7.43e+01
+   5   1.6012272e+01   1.5966720e+01  2.69e+00  0.00e+00  1.22e+00  1.26e+02
+   6   1.6075574e+01   1.6035195e+01  1.55e+00  0.00e+00  7.05e-01  1.30e+02
+   7   1.6070942e+01   1.6068667e+01  1.40e+00  0.00e+00  6.34e-01  2.38e+03
+   8   1.6070012e+01   1.6069974e+01  7.84e-02  0.00e+00  3.55e-02  1.42e+05
+   9   1.6069997e+01   1.6069995e+01  1.32e-03  0.00e+00  6.00e-04  2.05e+06
+  10   1.6070000e+01   1.6069999e+01  7.87e-05  0.00e+00  3.57e-05  1.86e+07
+  11   1.6070000e+01   1.6070000e+01  8.29e-06  0.00e+00  3.76e-06  9.23e+08
+CPLEX Error  3003: Not a mixed-integer problem.
+1 of 3 MIP starts provided solutions.
+MIP start 'm1' defined initial solution with objective 14.9909.
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 6 columns.
+MIP Presolve modified 299 coefficients.
+Reduced MIP has 18 rows, 33 columns, and 119 nonzeros.
+Reduced MIP has 28 binaries, 4 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.15 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+Tried aggregator 1 time.
+Reduced MIP has 18 rows, 33 columns, and 119 nonzeros.
+Reduced MIP has 28 binaries, 4 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.05 ticks)
+Probing time = 0.00 sec. (0.01 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 32 threads.
+Root relaxation solution time = 0.00 sec. (0.05 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                           14.9909       16.0700       28    7.20%
+      0     0       16.0700     2       14.9909       16.0700       28    7.20%
+*     0+    0                           16.0700       16.0700       28    0.00%
+      0     0        cutoff             16.0700       16.0700       28    0.00%
+Elapsed time = 0.00 sec. (0.45 ticks, tree = 0.00 MB, solutions = 1)
+ub: 16.070000076928277, lb: 16.069999960714313
+###################################
+k ... 33
+solution = x* ... Any[18,1,32,2,16,11,21,7,9,25,10,26,29,34,35,19,17,8,22,6,24,4,37,3,28,5,38,20,23,13,36,33,30]
+model: PowerModels.GenericPowerModel{PowerModels.SOCWRForm}, cut_type: AC, model_type: OPF
+total number of iterations ... 8
+solution cost ... 16.069999960714313
+computation time ... 0.197916683
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.45 ticks)
+Parallel b&c, 32 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.45 ticks)
+mpc.areas
+WARNING: unrecognized data matrix named "mpc.areas" data was ignored.
+WARNING: Ipopt finished with status Restoration_Failed
+WARNING: Not solved to optimality, status: Error
+WARNING: there was an issue with getsolvetime() on the solver, falling back on @timed.  This is not a rigorous timing value.
+full AC load shed ... NaN
+###################################
