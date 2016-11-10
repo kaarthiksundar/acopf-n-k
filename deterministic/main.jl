@@ -92,6 +92,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
         @constraint(master_problem, eta <= result["objective"] + sum{alpha[i]*x[i], i in collect(keys(alpha))})
     end
     
+    final_lines = current_lines
     tic()
     solve(master_problem)
 
@@ -196,4 +197,4 @@ num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSol
 
 solution_dict["solution"] = solution_vector 
 json_string = JSON.json(solution_dict)
-write("det_$(args["k"])_$(num_buses).json", json_string)
+write("./json_files/det_$(args["k"])_$(num_buses).json", json_string)

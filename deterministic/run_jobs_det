@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for k in `seq 2 38`;
+do
+    sbatch --job-name=det_case24_$k --output=./output/det_case24_$k.out ./runscript.sh ../data/nesta_case24_ieee_rts.m $k
+done
+
+
+for k in `seq 2 120`;
+do
+    sbatch --job-name=det_case73_$k --output=./output/det_case73_$k.out ./runscript.sh ../data/nesta_case73_ieee_rts.m $k
+done
