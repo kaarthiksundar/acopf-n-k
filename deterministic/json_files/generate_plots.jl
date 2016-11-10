@@ -16,7 +16,7 @@ if case_number == 24
     end
 else
     if case_kind == "det"
-        k_max = 120
+        k_max = 20
     else
         k_max = 20
     end
