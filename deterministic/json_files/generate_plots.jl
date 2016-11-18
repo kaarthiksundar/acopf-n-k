@@ -63,10 +63,10 @@ for k in 2:k_max
 end 
 
 plt = Axis([
-            Plots.Linear(k_values, dc_load_shed, markSize=0.5, legendentry=L"DC"),
-            Plots.Linear(k_values, soc1_load_shed, markSize=0.5, legendentry=L"SOC"),
-            Plots.Linear(k_values, dc_ac_load_shed, markSize=0.5, legendentry=L"DC(AC)"),
-            Plots.Linear(k_values, soc1_ac_load_shed, markSize=0.5, legendentry=L"SOC(AC)"),
+            Plots.Linear(k_values, dc_load_shed*100, markSize=0.5, legendentry=L"DC"),
+            #Plots.Linear(k_values, soc1_load_shed, markSize=0.5, legendentry=L"SOC"),
+            Plots.Linear(k_values, dc_ac_load_shed*100, markSize=0.5, legendentry=L"DC(AC)"),
+            #Plots.Linear(k_values, soc1_ac_load_shed, markSize=0.5, legendentry=L"SOC(AC)"),
             #Plots.Linear(k_values, soc2_load_shed, markSize=0.5, legendentry=L"soc-ac") 
            ], 
            xlabel="k value", title="objective values", xmin=0, xmax=k_values[length(k_values)]+1, legendPos="south east")
