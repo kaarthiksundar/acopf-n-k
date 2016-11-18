@@ -1,6 +1,7 @@
 using JuMP
 using Ipopt
 using CPLEX
+using Gurobi
 using PowerModels
 include("prob.jl")
 include("cut.jl")
@@ -206,8 +207,8 @@ args["k"] = parse(Int, ARGS[2])
 
 # master_problem(file = args["file"], k = args["k"], solver = IpoptSolver(print_level=5), model_constructor = args["model"], cut_constructor = args["cut"])
 num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
-num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
-num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
+num_buses = master_problem(file = args["file"], k = args["k"], solver = GurobiSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
+# num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
 
 # model_constructor = DCPPowerModel/DCPLLPowerModel/SOCWRPowerModel; cut_constructor = "DC"/"AC"
 

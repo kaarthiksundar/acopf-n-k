@@ -6,9 +6,10 @@ function post_pfls{T}(pm::GenericPowerModel{T})
     variable_active_generation(pm)
     variable_reactive_generation(pm) # does nothing for DC
     variable_load_shed(pm) # TODO: add a PR to PowerModels; also overloaded
+    variable_conductance_shed(pm) # variable that has 0 and vmax^2 as bounds; for each bus
     PowerModels.variable_active_line_flow(pm) # overloaded: p(i,j) = -p(j,i)
     PowerModels.variable_reactive_line_flow(pm) # overloaded: does nothing for DC
-
+    
     objective_min_load_shed(pm) # TODO: add PR to PowerModels
 
     PowerModels.constraint_theta_ref(pm) # overloaded: does nothing for SOC -
@@ -17,11 +18,15 @@ function post_pfls{T}(pm::GenericPowerModel{T})
     for (i, bus) in pm.set.buses
         constraint_active_kcl_ls(pm, bus)
         constraint_reactive_kcl_ls(pm, bus)
+        #PowerModels.constraint_active_kcl_shunt(pm, bus)
+        #PowerModels.constraint_reactive_kcl_shunt(pm, bus)
     end
 
     for (i, branch) in pm.set.branches
-        constraint_active_ohms(pm, branch)
-        constraint_reactive_ohms(pm, branch)
+        #constraint_active_ohms(pm, branch)
+        #constraint_reactive_ohms(pm, branch)
+        PowerModels.constraint_active_ohms_yt(pm, branch)
+        PowerModels.constraint_reactive_ohms_yt(pm, branch)
 
         PowerModels.constraint_phase_angle_difference(pm, branch)
         PowerModels.constraint_thermal_limit_from(pm, branch)
@@ -149,6 +154,21 @@ function variable_load_shed{T <: PowerModels.AbstractACPForm}(pm::GenericPowerMo
     return ld
 end
 
+function variable_conductance_shed{T <: PowerModels.AbstractDCPForm}(pm::GenericPowerModel{T})
+    @variable(pm.model, 0.0 <= ld_c[i in pm.set.bus_indexes] <= 1.0, start = 0.0)
+    return ld_c
+end 
+
+function variable_conductance_shed{T <: PowerModels.AbstractWRForm}(pm::GenericPowerModel{T})
+    @variable(pm.model, 0.0 <= ld_c[i in pm.set.bus_indexes] <= pm.set.buses[i]["vmax"]^2, start = 0.0)
+    return ld_c
+end 
+
+function variable_conductance_shed{T <: PowerModels.AbstractACPForm}(pm::GenericPowerModel{T})
+    @variable(pm.model, 0.0 <= ld_c[i in pm.set.bus_indexes] <= 1.0, start = 0.0)
+    return ld_c
+end 
+
 function objective_min_load_shed{T}(pm::GenericPowerModel{T})
     c_pd = [bp => 1 for bp in pm.set.bus_indexes]
     for (i, bus) in pm.set.buses
@@ -168,8 +188,10 @@ function constraint_active_kcl_ls{T <: PowerModels.AbstractDCPForm}(pm::GenericP
     pg = getvariable(pm.model, :pg)
     p_expr = pm.model.ext[:p_expr]
     ld = getvariable(pm.model, :ld)
+    ld_c = getvariable(pm.model, :ld_c)
 
-    c = @constraint(pm.model, sum{p_expr[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]))
+    c = @constraint(pm.model, sum{p_expr[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]) - bus["gs"]*ld_c[i])
+    #c = @constraint(pm.model, sum{p_expr[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]))
     return Set([c])
 end
 
@@ -187,8 +209,10 @@ function constraint_active_kcl_ls{T <: PowerModels.AbstractWRForm}(pm::GenericPo
     p = getvariable(pm.model, :p)
     pg = getvariable(pm.model, :pg)
     ld = getvariable(pm.model, :ld)
+    ld_c = getvariable(pm.model, :ld_c)
 
-    c = @constraint(pm.model, sum{p[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]))
+    c = @constraint(pm.model, sum{p[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]) - bus["gs"]*ld_c[i])
+    #c = @constraint(pm.model, sum{p[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]))
     return Set([c])
 end
 
@@ -201,8 +225,10 @@ function constraint_reactive_kcl_ls{T <: PowerModels.AbstractWRForm}(pm::Generic
     q = getvariable(pm.model, :q)
     qg = getvariable(pm.model, :qg)
     ld = getvariable(pm.model, :ld)
+    ld_c = getvariable(pm.model, :ld_c)
 
-    c = @constraint(pm.model, sum{q[a], a in bus_branches} == sum{qg[g], g in bus_gens} - bus["qd"]*(1-ld[i]))
+    c = @constraint(pm.model, sum{q[a], a in bus_branches} == sum{qg[g], g in bus_gens} - bus["qd"]*(1-ld[i]) + bus["bs"]*ld_c[i])
+    #c = @constraint(pm.model, sum{q[a], a in bus_branches} == sum{qg[g], g in bus_gens} - bus["qd"]*(1-ld[i]))
     return Set([c])
 end
 
@@ -211,11 +237,14 @@ function constraint_active_kcl_ls{T <: PowerModels.AbstractACPForm}(pm::GenericP
     bus_branches = pm.set.bus_branches[i]
     bus_gens = pm.set.bus_gens[i]
 
+    v = getvariable(pm.model, :v)
     p = getvariable(pm.model, :p)
     pg = getvariable(pm.model, :pg)
     ld = getvariable(pm.model, :ld)
+    ld_c = getvariable(pm.model, :ld_c)
 
-    c = @constraint(pm.model, sum{p[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]))
+    c = @NLconstraint(pm.model, sum{p[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]) - bus["gs"]*ld_c[i]*v[i]^2)
+    #c = @constraint(pm.model, sum{p[a], a in bus_branches} == sum{pg[g], g in bus_gens} - bus["pd"]*(1-ld[i]))
     return Set([c])
 end
 
@@ -224,11 +253,14 @@ function constraint_reactive_kcl_ls{T <: PowerModels.AbstractACPForm}(pm::Generi
     bus_branches = pm.set.bus_branches[i]
     bus_gens = pm.set.bus_gens[i]
 
+    v = getvariable(pm.model, :v)
     q = getvariable(pm.model, :q)
     qg = getvariable(pm.model, :qg)
     ld = getvariable(pm.model, :ld)
+    ld_c = getvariable(pm.model, :ld_c)
 
-    c = @constraint(pm.model, sum{q[a], a in bus_branches} == sum{qg[g], g in bus_gens} - bus["qd"]*(1-ld[i]))
+    c = @NLconstraint(pm.model, sum{q[a], a in bus_branches} == sum{qg[g], g in bus_gens} - bus["qd"]*(1-ld[i]) + bus["bs"]*ld_c[i]*v[i]^2)
+    #c = @constraint(pm.model, sum{q[a], a in bus_branches} == sum{qg[g], g in bus_gens} - bus["qd"]*(1-ld[i]))
     return Set([c])
 end
 
