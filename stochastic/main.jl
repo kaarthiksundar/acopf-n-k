@@ -19,10 +19,6 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     branches = filter((i, branch) -> branch["br_status"] == 1 && branch["f_bus"] in keys(buses) && branch["t_bus"] in keys(buses), branches)
     branch_indexes = collect(keys(branches))
 
-    #=
-    srand(2016)
-    d = Uniform()
-    =#
     branch_probabilities = [ i => branches[i]["prob"] for i in branch_indexes ]
     log_p = [ i => log(branch_probabilities[i]) for i in branch_indexes ]
     
@@ -174,4 +170,10 @@ num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSol
 
 solution_dict["solution"] = solution_vector 
 json_string = JSON.json(solution_dict)
-write("stoch_$(args["k"])_$(num_buses).json", json_string)
+if endswith(args["file"], "api.m")
+    write("./json_files/stoch_$(args["k"])_$(num_buses)_api.json", json_string)
+elseif endswith(args["file"], "sad.m")
+    write("./json_files/stoch_$(args["k"])_$(num_buses)_sad.json", json_string)
+else
+    write("./json_files/stoch_$(args["k"])_$(num_buses).json", json_string)
+end
