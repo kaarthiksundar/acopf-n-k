@@ -1,32 +1,32 @@
 #!/bin/bash
 
-for k in `seq 2 38`;
+for k in `seq 2 20`;
 do
     sbatch --job-name=stoch_case24_$k --output=./output/stoch_case24_$k.out ./runscript.sh ../data/nesta_case24_ieee_rts.m $k
 done
 
-#for k in `seq 2 38`;
-#do
-#    sbatch --job-name=det_case24_$k --output=./output/det_case24_$k.out ./runscript.sh ../data/nesta_case24_ieee_rts__api.m $k
-#done
+for k in `seq 2 20`;
+do
+    sbatch --job-name=stoch_case24_$k --output=./output/stoch_case24_$k.out ./runscript.sh ../data/nesta_case24_ieee_rts__api.m $k
+done
 
-#for k in `seq 2 38`;
-#do
-#    sbatch --job-name=det_case24_$k --output=./output/det_case24_$k.out ./runscript.sh ../data/nesta_case24_ieee_rts__sad.m $k
-#done
+for k in `seq 2 20`;
+do
+    sbatch --job-name=stoch_case24_$k --output=./output/stoch_case24_$k.out ./runscript.sh ../data/nesta_case24_ieee_rts__sad.m $k
+done
 
 
-#for k in `seq 2 120`;
-#do
-#    sbatch --job-name=det_case73_$k --output=./output/det_case73_$k.out ./runscript.sh ../data/nesta_case73_ieee_rts.m $k
-#done
+for k in `seq 2 10`;
+do
+    sbatch --job-name=stoch_case73_$k --output=./output/stoch_case73_$k.out ./runscript.sh ../data/nesta_case73_ieee_rts.m $k
+done
 
-#for k in `seq 2 20`;
-#do
-#    sbatch --job-name=det_case73_$k --output=./output/det_case73_$k.out ./runscript.sh ../data/nesta_case73_ieee_rts__api.m $k
-#done
+for k in `seq 2 10`;
+do
+    sbatch --job-name=stoch_case73_$k --output=./output/stoch_case73_$k.out ./runscript.sh ../data/nesta_case73_ieee_rts__api.m $k
+done
 
-#for k in `seq 2 20`;
-#do
-#    sbatch --job-name=det_case73_$k --output=./output/det_case73_$k.out ./runscript.sh ../data/nesta_case73_ieee_rts__sad.m $k
-#done
+for k in `seq 2 10`;
+do
+    sbatch --job-name=stoch_case73_$k --output=./output/stoch_case73_$k.out ./runscript.sh ../data/nesta_case73_ieee_rts__sad.m $k
+done
