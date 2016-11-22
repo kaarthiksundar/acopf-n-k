@@ -137,6 +137,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
         end 
         status, solve_time = solve(pm)
         result = PowerModels.build_solution(pm, status, solve_time)
+        println(result)
         alpha = get_cut_coefficients(pm, cut_constructor = cut_constructor)
         # println(getvalue(getvariable(pm.model, :line_z)))
         sub_objective = result["objective"]
@@ -186,6 +187,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     post_pfls(pm)
     status, solve_time = solve(pm)
     result = PowerModels.build_solution(pm, status, solve_time)
+    println(result)
     println("full AC load shed ... $(result["objective"])")
     println("###################################")
     

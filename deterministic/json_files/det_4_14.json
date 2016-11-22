@@ -1,1 +1,1 @@
-{"solution":[{"iterations":6,"time":4.370568059,"k":4,"model":"PowerModels.GenericPowerModel{PowerModels.StandardDCPForm}","lines":[2,4,3,5],"load_shed":2.3729999999999998,"cut":"DC","ac_load_shed":0},{"iterations":5,"time":1.574582032,"k":4,"model":"PowerModels.GenericPowerModel{PowerModels.SOCWRForm}","lines":[2,4,3,5],"load_shed":2.3730031452007485,"cut":"DC","ac_load_shed":0}]}
+{"solution":[{"iterations":5,"time":5.340527406,"k":4,"model":"PowerModels.GenericPowerModel{PowerModels.SOCWRForm}","lines":[2,4,3,5],"load_shed":2.3730031452007485,"cut":"DC","ac_load_shed":0}]}

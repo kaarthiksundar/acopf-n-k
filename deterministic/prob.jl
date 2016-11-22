@@ -2,7 +2,7 @@ using PowerModels
 
 function post_pfls{T}(pm::GenericPowerModel{T})
 
-    PowerModels.variable_complex_voltage(pm) # overloaded: phase angle variables for DC
+    PowerModels.variable_complex_voltage(pm, bounded=false) # overloaded: phase angle variables for DC
     variable_active_generation(pm)
     variable_reactive_generation(pm) # does nothing for DC
     variable_load_shed(pm) # TODO: add a PR to PowerModels; also overloaded
