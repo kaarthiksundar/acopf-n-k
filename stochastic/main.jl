@@ -1,6 +1,7 @@
 using JuMP
 using Ipopt
 using CPLEX
+#using Gurobi
 using PowerModels
 using Distributions
 include("prob.jl")
@@ -71,7 +72,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
         cut_constructor = "DC"
     end
 
-    while (abs(zub - zlb) > 0.01*max(abs(zlb),(zub)))
+    while (zub - zlb > 0.01)
         iteration += 1
         current_xvals = [ i => x_val(i) for i in branch_indexes]
         current_lines = collect(keys(filter( (i, xval) -> xval > 1e-4, current_xvals)))
