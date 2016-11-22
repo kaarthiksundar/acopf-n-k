@@ -1,0 +1,64 @@
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\pgfplotsset{every axis legend/.append style={%
+cells={anchor=west}}
+}
+\usepgfplotslibrary{polar}
+\usetikzlibrary{arrows}
+\tikzset{>=stealth'}
+
+\begin{document}
+\begin{tikzpicture}[]
+\begin{axis}[title = {objective values}, legend pos = {south east}, xlabel = {k value}, xmax = {11}, xmin = {0}]\addplot+ [mark size = {0.5}]coordinates {
+(2.0, 338.43742615627906)
+(3.0, 412.7002549127395)
+(4.0, 540.3523428708124)
+(5.0, 566.8131232647333)
+(6.0, 629.9429307686241)
+(7.0, 520.7360963626268)
+(8.0, 774.7277841803182)
+(9.0, 774.7277841803178)
+(10.0, 755.8319845661626)
+};
+\addlegendentry{$DC$}
+\addplot+ [mark size = {0.5}]coordinates {
+(2.0, 284.25918054787417)
+(3.0, 463.9841723863686)
+(4.0, 695.2647779233057)
+(5.0, 551.059101448877)
+(6.0, 565.0020207775935)
+(7.0, 607.6670214769246)
+(8.0, 619.3821595380688)
+(9.0, 663.8194374614201)
+(10.0, 634.5913973385562)
+};
+\addlegendentry{$SOC$}
+\addplot+ [mark size = {0.5}]coordinates {
+(2.0, 397.3220860043149)
+(3.0, 473.85895446338486)
+(4.0, 702.3997724982441)
+(5.0, 609.876236556032)
+(6.0, 608.8972331326996)
+(7.0, 743.374082311931)
+(8.0, 743.2874200774821)
+(9.0, 743.2670333626284)
+(10.0, 743.1847902830548)
+};
+\addlegendentry{$DC(AC)$}
+\addplot+ [mark size = {0.5}]coordinates {
+(2.0, 397.3220860043149)
+(3.0, 473.85895446338486)
+(4.0, 699.3964246051493)
+(5.0, 609.876236556032)
+(6.0, 609.7939934738849)
+(7.0, 743.374082311931)
+(8.0, 743.2918392290442)
+(9.0, 743.2051769945851)
+(10.0, 743.1847902830548)
+};
+\addlegendentry{$SOC(AC)$}
+\end{axis}
+
+\end{tikzpicture}
+\end{document}

@@ -12,13 +12,13 @@ if case_number == 24
     if case_kind == "det"
         k_max = 38
     else
-        k_max = 10
+        k_max = 20
     end
 else
     if case_kind == "det"
         k_max = 20
     else
-        k_max = 5
+        k_max = 10
     end
 end 
 
