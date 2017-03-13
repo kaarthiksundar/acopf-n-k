@@ -2,7 +2,7 @@ using PowerModels
 
 function post_pfls{T}(pm::GenericPowerModel{T})
 
-    PowerModels.variable_complex_voltage(pm, bounded=false) # overloaded: phase angle variables for DC
+    PowerModels.variable_complex_voltage(pm, bounded=true) # overloaded: phase angle variables for DC
     variable_active_generation(pm)
     variable_reactive_generation(pm) # does nothing for DC
     variable_load_shed(pm) # TODO: add a PR to PowerModels; also overloaded
@@ -23,10 +23,10 @@ function post_pfls{T}(pm::GenericPowerModel{T})
     end
 
     for (i, branch) in pm.set.branches
-        #constraint_active_ohms(pm, branch)
-        #constraint_reactive_ohms(pm, branch)
-        PowerModels.constraint_active_ohms_yt(pm, branch)
-        PowerModels.constraint_reactive_ohms_yt(pm, branch)
+        constraint_active_ohms(pm, branch)
+        constraint_reactive_ohms(pm, branch)
+        #PowerModels.constraint_active_ohms_yt(pm, branch)
+        #PowerModels.constraint_reactive_ohms_yt(pm, branch)
 
         PowerModels.constraint_phase_angle_difference(pm, branch)
         PowerModels.constraint_thermal_limit_from(pm, branch)

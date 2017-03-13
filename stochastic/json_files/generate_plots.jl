@@ -62,7 +62,7 @@ for k in 2:k_max
     soc1_ac_load_shed[k-1] = (typeof(solution[2]["ac_load_shed"]) == Void) ? soc1_load_shed[k-1] : solution[2]["ac_load_shed"]
     soc1_expected_ac_load_shed[k-1] = (typeof(solution[2]["expected_ac_load_shed"]) == Void) ? soc1_load_shed[k-1] : solution[2]["expected_ac_load_shed"]
     soc1_times[k-1] = solution[2]["time"]
-    soc1_iterations[k-1] = solution[1]["iterations"]
+    soc1_iterations[k-1] = solution[2]["iterations"]
     
     #=
     soc2_load_shed[k-1] = solution[3]["load_shed"]
@@ -91,7 +91,7 @@ plt = Axis([
             Plots.Linear(k_values, soc1_expected_ac_load_shed*100, markSize=0.5, legendentry=L"SOC(AC)"),
             #Plots.Linear(k_values, soc2_load_shed, markSize=0.5, legendentry=L"soc-ac") 
            ], 
-           xlabel="k value", title="expected values", xmin=0, xmax=k_values[length(k_values)]+1, legendPos="south east")
+           xlabel="k value", title="expected values", xmin=0, xmax=k_values[length(k_values)]+1, legendPos="north east")
 
 save("expected_objective_$(case_number)_$(case_type)_$(case_kind).pdf", plt)
 

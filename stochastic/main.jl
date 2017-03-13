@@ -6,23 +6,19 @@ using PowerModels
 using Distributions
 include("prob.jl")
 include("cut.jl")
-include("io.jl")
 
-function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solver = IpoptSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
+function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, solver = IpoptSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
 
     data = PowerModels.parse_file(file)
-    parse_prob_file(file, data)
-    buses = [ Int(bus["index"]) => bus for bus in data["bus"] ]
+    buses = Dict([(parse(Int, k), v) for (k, v) in data["bus"]])
     num_buses = length(buses)
-    println(num_buses)
     buses = filter((i, bus) -> bus["bus_type"] != 4, buses)
-    branches = [ Int(branch["index"]) => branch for branch in data["branch"] ]
+    branches = Dict([(parse(Int, k), v) for (k, v) in data["branch"]])
     branches = filter((i, branch) -> branch["br_status"] == 1 && branch["f_bus"] in keys(buses) && branch["t_bus"] in keys(buses), branches)
     branch_indexes = collect(keys(branches))
-
-    branch_probabilities = [ i => branches[i]["prob"] for i in branch_indexes ]
-    log_p = [ i => log(branch_probabilities[i]) for i in branch_indexes ]
     
+    log_p = Dict([(i, log(branches[i]["prob"])) for i in branch_indexes])
+
     totalload = 0.0
     for (i,bus) in buses
         totalload += bus["pd"]
@@ -37,7 +33,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     @variable(master_problem, y <= 1e6)
 
     @constraint(master_problem, sum(x) == k)
-    @constraint(master_problem, p == sum{ x[i]*log_p[i], i in branch_indexes})
+    @constraint(master_problem, p == sum(x[i]*log_p[i] for i in branch_indexes))
 
     @objective(master_problem, Max, y) 
     # add outer approximation of constraint y ⩽ p + log η using lazy constraint callback:  y ⩽ p + log η₀ + 1/η₀(η - η₀)
@@ -74,20 +70,18 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
 
     while (zub - zlb > 0.01)
         iteration += 1
-        current_xvals = [ i => x_val(i) for i in branch_indexes]
+        current_xvals = Dict(i => x_val(i) for i in branch_indexes)
         current_lines = collect(keys(filter( (i, xval) -> xval > 1e-4, current_xvals)))
         p_val = getvalue(p)
-        data = PowerModels.parse_file(file)
-        for branch in data["branch"]
-            for index in current_lines
-                if Int(branch["index"]) == index
-                    branch["br_status"] = 0
-                end
-            end
-        end
+        for index in current_lines
+            data["branch"][string(index)]["br_status"] = 0
+        end 
         pm = model_constructor(data; solver = solver)
         post_pfls(pm)
         status, solve_time = solve(pm)
+        for index in current_lines
+            data["branch"][string(index)]["br_status"] = 1
+        end 
         result = PowerModels.build_solution(pm, status, solve_time)
         alpha = get_cut_coefficients(pm, cut_constructor = cut_constructor)
         sub_objective = result["objective"]
@@ -106,7 +100,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
             end
         end
         @constraint(master_problem, expr <= length(branch_indexes)-1)
-        @constraint(master_problem, eta <= sub_objective + sum{alpha[i]*x[i], i in collect(keys(alpha))})
+        @constraint(master_problem, eta <= sub_objective + sum(alpha[i]*x[i] for i in collect(keys(alpha))))
         solve(master_problem)
         zub = getobjectivevalue(master_problem)
         println("ub: $zub, lb: $zlb")
@@ -129,14 +123,9 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts.m", k = 4, solve
     time_taken = toq()
     println("time ... $time_taken")
     # solving the AC load shed model on the final set of lines
-    data = PowerModels.parse_file(file)
-    for branch in data["branch"]
-        for index in final_lines
-            if Int(branch["index"]) == index
-                branch["br_status"] = 0
-            end
-        end
-    end
+    for index in final_lines
+        data["branch"][string(index)]["br_status"] = 0
+    end 
     pm = ACPPowerModel(data; solver = IpoptSolver(print_level=0))
     post_pfls(pm)
     status, solve_time = solve(pm)
@@ -162,7 +151,7 @@ solution_vector = Any[]
 
 args = Dict{Any,Any}()
 println(ARGS[1])
-args["file"] = ASCIIString(ARGS[1])
+args["file"] = String(ARGS[1])
 args["k"] = parse(Int, ARGS[2])
 
 num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")

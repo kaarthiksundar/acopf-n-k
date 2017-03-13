@@ -1,9 +1,9 @@
 using PowerModels 
 
-function parse_prob_file(file::ASCIIString, data::Dict{AbstractString,Any})
+function parse_prob_file(file::String, data::Dict{AbstractString,Any})
 
     file = string(split(file, ".m")[1], ".prob")
-    data_string = readall(open(file))
+    data_string = readstring(open(file))
     data_lines = split(data_string, '\n')
     parsed_matrices = []
     last_index = length(data_lines)

@@ -1,9 +1,9 @@
 using PowerModels
 
 function get_cut_coefficients{T <: PowerModels.AbstractDCPForm}(pm::GenericPowerModel{T}; cut_constructor = "DC")
-    branches = pm.set.branches
-    branch_indexes = pm.set.branch_indexes
-    alpha = [ i => 0.0 for i in branch_indexes ]
+    branches = pm.ref[:branch]
+    branch_indexes = keys(branches)
+    alpha = Dict(i => 0.0 for i in branch_indexes)
     p = getvariable(pm.model, :p)
     for (i, branch) in branches
         f_bus = branch["f_bus"]
@@ -17,10 +17,10 @@ function get_cut_coefficients{T <: PowerModels.AbstractDCPForm}(pm::GenericPower
 end
 
 function get_cut_coefficients{T <: PowerModels.AbstractWRForm}(pm::GenericPowerModel{T}; cut_constructor = "DC")
-    branches = pm.set.branches
-    branch_indexes = pm.set.branch_indexes
-    alpha = [ i => 0.0 for i in branch_indexes ]
-    gen_indexes = pm.set.gen_indexes
+    branches = pm.ref[:branch]
+    branch_indexes = keys(branches)
+    alpha = Dict(i => 0.0 for i in branch_indexes)
+    gen_indexes = keys(pm.ref[:gen])
     p = getvariable(pm.model, :p)
     q = getvariable(pm.model, :q)
     for (i, branch) in branches
@@ -33,7 +33,7 @@ function get_cut_coefficients{T <: PowerModels.AbstractWRForm}(pm::GenericPowerM
         p_temp = 0.0
         
         if (cut_constructor == "AC")
-            for (j, bus) in pm.set.buses
+        for (j, bus) in pm.ref[:bus]
                 if (bus["pd"] > 0 && bus["pd"] >= q_max)
                     ld_temp = 1 - q_max/bus["pd"]
                     p_temp = max(p_temp, bus["pd"]*(1-ld_temp))
