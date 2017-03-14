@@ -1,6 +1,6 @@
 using PowerModels 
 
-abstract AbstractNFForm <: PowerModels.AbstractDCPForm
+abstract AbstractNFForm <: PowerModels.AbstractDCPForm 
 
 type StandardNFForm <: AbstractNFForm end
 typealias NFPowerModel GenericPowerModel{StandardNFForm}
@@ -15,7 +15,11 @@ function post_pfls{T}(pm::GenericPowerModel{T})
     PowerModels.variable_voltage(pm) # overloaded: phase angle variables for DC
     variable_generation(pm)
     variable_load_shed(pm) # TODO: add a PR to PowerModels; also overloaded
-    PowerModels.variable_line_flow(pm) 
+    if T != StandardNFForm 
+        PowerModels.variable_line_flow(pm) 
+    else
+        variable_line_flow(pm)
+    end 
 
     objective_min_load_shed(pm) # TODO: add PR to PowerModels
 
@@ -124,6 +128,20 @@ function variable_load_shed{T <: PowerModels.AbstractACPForm}(pm::GenericPowerMo
     return ld
 end
 
+function variable_line_flow{T <: AbstractNFForm}(pm::GenericPowerModel{T}; bounded = true)
+    if bounded
+        @variable(pm.model, -pm.ref[:branch][l]["rate_a"] <= p[(l,i,j) in pm.ref[:arcs_from]] <= pm.ref[:branch][l]["rate_a"], start = PowerModels.getstart(pm.ref[:branch], l, "p_start"))
+    else
+        @variable(pm.model, p[(l,i,j) in pm.ref[:arcs_from]], start = PowerModels.getstart(pm.ref[:branch], l, "p_start"))
+    end
+
+    p_expr = Dict([((l,i,j), 1.0*p[(l,i,j)]) for (l,i,j) in pm.ref[:arcs_from]])
+    p_expr = merge(p_expr, Dict([((l,j,i), -1.0*p[(l,i,j)]) for (l,i,j) in pm.ref[:arcs_from]]))
+
+    pm.model.ext[:p_expr] = p_expr
+end 
+
+# objective definition
 function objective_min_load_shed{T}(pm::GenericPowerModel{T})
     c_pd = Dict(bp => 1 for bp in keys(pm.ref[:bus]))
     for (i, bus) in pm.ref[:bus]
