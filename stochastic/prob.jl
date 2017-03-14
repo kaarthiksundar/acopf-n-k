@@ -1,4 +1,14 @@
-using PowerModels
+using PowerModels 
+
+abstract AbstractNFForm <: PowerModels.AbstractDCPForm
+
+type StandardNFForm <: AbstractNFForm end
+typealias NFPowerModel GenericPowerModel{StandardNFForm}
+
+# default DC constructor
+function NFPowerModel(data::Dict{AbstractString,Any}; kwargs...)
+    return GenericPowerModel(data, StandardNFForm(); kwargs...)
+end
 
 function post_pfls{T}(pm::GenericPowerModel{T})
 
@@ -24,9 +34,7 @@ function post_pfls{T}(pm::GenericPowerModel{T})
         PowerModels.constraint_thermal_limit_from(pm, branch)
         PowerModels.constraint_thermal_limit_to(pm, branch)
     end
-
 end
-
 
 function variable_generation{T}(pm::GenericPowerModel{T}; kwargs...)
     variable_active_generation(pm; kwargs...)
@@ -193,6 +201,11 @@ function constraint_kcl_ls{T <: PowerModels.AbstractACPForm}(pm::GenericPowerMod
     c1 = @constraint(pm.model, sum(p[a] for a in bus_arcs) == sum(pg[g] for g in bus_gens) - pd*(1-ld[i]))
     c2 = @constraint(pm.model, sum(q[a] for a in bus_arcs) == sum(qg[g] for g in bus_gens) - qd*(1-ld[i]))
     return Set([c1, c2])
+end
+
+function constraint_ohms_from{T <: AbstractNFForm}(pm::GenericPowerModel{T}, f_bus, t_bus, f_idx, t_idx, g, b)
+     # Do nothing, this model is symmetric
+     return Set()
 end
 
 function constraint_ohms_from{T <: PowerModels.AbstractDCPForm}(pm::GenericPowerModel{T}, f_bus, t_bus, f_idx, t_idx, g, b)

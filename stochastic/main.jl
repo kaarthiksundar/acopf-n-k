@@ -2,7 +2,6 @@ using JuMP
 using Ipopt
 using CPLEX
 #using Gurobi
-using PowerModels
 using Distributions
 include("prob.jl")
 include("cut.jl")
@@ -154,10 +153,12 @@ println(ARGS[1])
 args["file"] = String(ARGS[1])
 args["k"] = parse(Int, ARGS[2])
 
+num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
 num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
 num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
 # num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
 
+#=
 solution_dict["solution"] = solution_vector 
 json_string = JSON.json(solution_dict)
 if endswith(args["file"], "api.m")
@@ -167,3 +168,4 @@ elseif endswith(args["file"], "sad.m")
 else
     write("./json_files/stoch_$(args["k"])_$(num_buses).json", json_string)
 end
+=#
