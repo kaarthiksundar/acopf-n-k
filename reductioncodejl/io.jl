@@ -7,7 +7,7 @@ type Graph
     edge_map            ::Dict{Int,Any}
     bus_to_vertex_map   ::Dict{Int,Int}
     data                ::Dict{AbstractString,Any}
-    sets                ::PowerModels.PowerDataSets
+    ref                 ::Dict{Symbol,Any}
     function Graph()
         gm = new()
         gm.graph = simple_graph(0, is_directed=false)
@@ -43,93 +43,6 @@ type Attack
     end
 end
 
-function parse_prob_file(file::ASCIIString, data::Dict{AbstractString,Any})
-
-    file = string(split(file, ".m")[1], ".prob")
-    data_string = readall(open(file))
-    data_lines = split(data_string, '\n')
-    parsed_matrices = []
-    last_index = length(data_lines)
-    index = 1
-
-    while index <= last_index
-        line = strip(data_lines[index])
-
-        if length(line) <= 0 || strip(line)[1] == '%'
-            index += 1
-            continue
-        end
-
-        if contains(line, "[")
-            matrix = PowerModels.parse_matrix(data_lines, index)
-            push!(parsed_matrices, matrix)
-            index += matrix["line_count"] - 1
-        end
-        index += 1
-    end
-
-    parsed_matrix = parsed_matrices[1]
-    prob = []
-    if parsed_matrix["name"] == "mpc.branchprobabilities"
-        for row in parsed_matrix["data"]
-            push!(prob, parse(Float64, row[3]))
-        end
-    end 
-    
-    for i in 1:length(prob)
-        for branch in data["branch"]
-            if branch["index"] == i
-                branch["prob"] = prob[i]
-                break 
-            end 
-        end 
-    end 
-
-    return 
-end
-
-function parse_layout_file(file)
-    data_string = readall(open(file))
-    data_lines = split(data_string, '\n')
-    parsed_matrices = []
-    last_index = length(data_lines)
-    index = 1
-
-    while index <= last_index
-        line = strip(data_lines[index])
-
-        if length(line) <= 0 || strip(line)[1] == '%'
-            index += 1
-            continue
-        end
-
-        if contains(line, "[")
-            matrix = PowerModels.parse_matrix(data_lines, index)
-            push!(parsed_matrices, matrix)
-            index += matrix["line_count"] - 1
-        end
-        index += 1
-    end
-
-    parsed_matrix = parsed_matrices[1]
-    bus_locations = []
-
-    if parsed_matrix["name"] == "mpc.buslocation"
-
-        for bus_row in parsed_matrix["data"]
-            bus_data = Dict{AbstractString,Any}(
-                                                "index" => parse(Int, bus_row[1]), 
-                                                "x_coord" => parse(Float64, bus_row[2]),
-                                                "y_coord" => parse(Float64, bus_row[3])
-            )
-
-            push!(bus_locations, bus_data)
-        end
-    end
-
-    return bus_locations
-end
-
 function populate_gm(gm::Graph, buses::Dict{Int,Any}, branches::Dict{Int,Any})
     i = 1
     for bus in buses
@@ -156,9 +69,9 @@ function populate_gm(gm::Graph, buses::Dict{Int,Any}, branches::Dict{Int,Any})
 end
 
 function get_vertices(gm::Graph; degree = 1)
-    vertices_with_degree = [ v => out_degree(v, gm.graph) for v in vertices(gm.graph) ]
+    vertices_with_degree = Dict(v => out_degree(v, gm.graph) for v in vertices(gm.graph))
     vertices_with_degree = filter((v,deg) -> deg == degree, vertices_with_degree)
-    neighbors = [ v => collect(out_edges(v, gm.graph)) for v in collect(keys(vertices_with_degree)) ]
+    neighbors = Dict(v => collect(out_edges(v, gm.graph)) for v in collect(keys(vertices_with_degree)))
 
     vertex_neighbors = VertexNeighbors[]
     for (v,n) in neighbors
@@ -176,7 +89,7 @@ function get_vertices(gm::Graph; degree = 1)
     return vertex_neighbors
 end
 
-function create_n_1_graph(gm::Graph, buses::Dict{Int,Any}, branches::Dict{Int,Any}, line)
+function create_n_1_graph(gm::Graph, buses, branches, line)
     i = 1
     for bus in buses
         add_vertex!(gm.graph)
@@ -207,20 +120,20 @@ function create_n_1_graph(gm::Graph, buses::Dict{Int,Any}, branches::Dict{Int,An
     return
 end
 
-function check_graph_for_isolation(gm::Graph, buses::Dict{Int,Any}, branches::Dict{Int,Any})
+function check_graph_for_isolation(gm::Graph, buses, branches)
     components = connected_components(gm.graph)
     isolated_load_vertices = Attack[]
     if length(components) == 1
         return Attack[]
     end
-    sets = gm.sets
+    ref = gm.ref
     for component in components
         is_gen = false
         for v in component
             i = gm.vertex_map[v]["index"]
             if buses[i]["bus_type"] == 2 || buses[i]["bus_type"] == 3
-                total_pmin = sum([abs(sets.gens[g]["pmin"]) for g in sets.bus_gens[i]])
-                total_pmax = sum([abs(sets.gens[g]["pmax"]) for g in sets.bus_gens[i]])
+                total_pmin = sum([abs(ref[:gen][g]["pmin"]) for g in ref[:bus_gens][i]])
+                total_pmax = sum([abs(ref[:gen][g]["pmax"]) for g in ref[:bus_gens][i]])
                 is_condensor = (total_pmin == 0 && total_pmax == 0) ? true : false
                 if is_condensor
                     continue
