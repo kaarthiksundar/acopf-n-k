@@ -84,6 +84,30 @@ mpc.branch = [
 	13	 14	 0.17093	 0.34802	 0.0	 76	 76	 76	 0.0	 0.0	 1	 -30.0	 30.0;
 ];
 
+%column_names%	prob
+mpc.branch_prob = [
+0.24;
+0.51;
+0.33;
+0.39;
+0.48;
+0.38;
+0.02;
+0.36;
+0.34;
+0.33;
+0.30;
+0.44;
+0.44;
+0.02;
+0.02;
+0.02;
+0.02;
+0.40;
+0.39;
+0.40;
+];
+
 % INFO    : === Translation Options ===
 % INFO    : Phase Angle Bound:           30.0 (deg.)
 % INFO    : Line Capacity Model:         stat

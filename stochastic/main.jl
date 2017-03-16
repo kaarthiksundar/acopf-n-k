@@ -15,7 +15,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     branches = Dict([(parse(Int, k), v) for (k, v) in data["branch"]])
     branches = filter((i, branch) -> branch["br_status"] == 1 && branch["f_bus"] in keys(buses) && branch["t_bus"] in keys(buses), branches)
     branch_indexes = collect(keys(branches))
-    
+
     log_p = Dict([(i, log(branches[i]["prob"])) for i in branch_indexes])
 
     totalload = 0.0
@@ -34,10 +34,10 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     @constraint(master_problem, sum(x) == k)
     @constraint(master_problem, p == sum(x[i]*log_p[i] for i in branch_indexes))
 
-    @objective(master_problem, Max, y) 
+    @objective(master_problem, Max, y)
     # add outer approximation of constraint y ⩽ p + log η using lazy constraint callback:  y ⩽ p + log η₀ + 1/η₀(η - η₀)
     # outer approximation of y ⩽ f(x) at x = xᵏ : y ⩽ f(xᵏ) + ∇f(xᵏ)⋅(x-xᵏ)
-    
+
     function outer_approximate(cb)
         eta_val = getvalue(eta)
         p_val = getvalue(p)
@@ -46,7 +46,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
             @lazyconstraint(cb, y <= p + log(eta_val) + inv_eta_val*(eta - eta_val))
         end
     end
-    
+
     addlazycallback(master_problem, outer_approximate)
 
     # anonymous function
@@ -55,7 +55,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     zlb = -1e10
     zub = 1e10
     eps = 1e-6
-    
+
     tic()
     solve(master_problem)
 
@@ -74,13 +74,13 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
         p_val = getvalue(p)
         for index in current_lines
             data["branch"][string(index)]["br_status"] = 0
-        end 
+        end
         pm = model_constructor(data; solver = solver)
         post_pfls(pm)
         status, solve_time = solve(pm)
         for index in current_lines
             data["branch"][string(index)]["br_status"] = 1
-        end 
+        end
         result = PowerModels.build_solution(pm, status, solve_time)
         alpha = get_cut_coefficients(pm, cut_constructor = cut_constructor)
         sub_objective = result["objective"]
@@ -104,10 +104,10 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
         zub = getobjectivevalue(master_problem)
         println("ub: $zub, lb: $zlb")
     end
-    
+
     p_val = getvalue(p)
     println("###################################")
-    println("k ... $k") 
+    println("k ... $k")
     println("solution = x* ... $(collect(final_lines))")
     println("model: $(model_constructor), cut_type: $(cut_constructor)")
     println("total number of iterations ... $iteration")
@@ -124,7 +124,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     # solving the AC load shed model on the final set of lines
     for index in final_lines
         data["branch"][string(index)]["br_status"] = 0
-    end 
+    end
     pm = ACPPowerModel(data; solver = IpoptSolver(print_level=0))
     post_pfls(pm)
     status, solve_time = solve(pm)
@@ -132,12 +132,12 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     println("full AC load shed ... $(result["objective"])")
     println("expected AC load shed ... $(actual_prob*result["objective"])")
     println("###################################")
-    solution = Dict{AbstractString,Any}("k" => k, "lines" => collect(final_lines), 
+    solution = Dict{AbstractString,Any}("k" => k, "lines" => collect(final_lines),
                                         "model" => model_constructor, "time" => time_taken,
                                         "cut" => cut_constructor, "prob" => actual_prob,
                                         "load_shed" => eta_val,
                                         "expected_load_shed" => actual_prob*eta_val,
-                                        "ac_load_shed" => result["objective"], 
+                                        "ac_load_shed" => result["objective"],
                                         "expected_ac_load_shed" => actual_prob*result["objective"],
                                         "iterations" => iteration)
     push!(solution_vector, solution)
@@ -146,7 +146,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
 end
 
 solution_dict = Dict{AbstractString,Any}()
-solution_vector = Any[] 
+solution_vector = Any[]
 
 args = Dict{Any,Any}()
 println(ARGS[1])
@@ -158,8 +158,24 @@ num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSol
 num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
 # num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
 
+f = open("./output_files/$(num_buses)_$(args["k"])", "w")
+write(f, "case model k time iterations probability load_shed expected_load_shed ac_load_shed expected_ac_load_shed lines\n")
+for solution in solution_vector
+    if solution["model"] == PowerModels.GenericPowerModel{StandardNFForm}
+        write(f, "$(num_buses) nf $(solution["k"]) $(solution["time"]) $(solution["iterations"]) $(solution["prob"]) $(solution["load_shed"]) $(solution["expected_load_shed"]) $(solution["ac_load_shed"]) $(solution["expected_ac_load_shed"]) $(solution["lines"]) \n")
+    end
+    if solution["model"] == PowerModels.GenericPowerModel{PowerModels.StandardDCPForm}
+        write(f, "$(num_buses) dc $(solution["k"]) $(solution["time"]) $(solution["iterations"]) $(solution["prob"]) $(solution["load_shed"]) $(solution["expected_load_shed"]) $(solution["ac_load_shed"]) $(solution["expected_ac_load_shed"]) $(solution["lines"]) \n")
+    end
+    if solution["model"] == PowerModels.GenericPowerModel{PowerModels.SOCWRForm}
+        write(f, "$(num_buses) soc $(solution["k"]) $(solution["time"]) $(solution["iterations"]) $(solution["prob"]) $(solution["load_shed"]) $(solution["expected_load_shed"]) $(solution["ac_load_shed"]) $(solution["expected_ac_load_shed"]) $(solution["lines"]) \n")
+    end
+end
+
+close(f)
+
 #=
-solution_dict["solution"] = solution_vector 
+solution_dict["solution"] = solution_vector
 json_string = JSON.json(solution_dict)
 if endswith(args["file"], "api.m")
     write("./json_files/stoch_$(args["k"])_$(num_buses)_api.json", json_string)
