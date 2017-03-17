@@ -155,13 +155,28 @@ args = Dict{Any,Any}()
 println(ARGS[1])
 args["file"] = String(ARGS[1])
 args["k"] = parse(Int, ARGS[2])
+args["nf"] = parse(Int, ARGS[3]) # 0 - all three, 1 - only nf, 2 - no nf
 
-# num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
-num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
-num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
+if args["nf"] == 0
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
+elseif args["nf"] == 1
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
+else
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
+end
 # num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
 
-f = open("./output_files/$(num_buses)_$(args["k"])", "w")
+if args["nf"] == 0
+    f = open("./output_files/$(num_buses)_$(args["k"])", "w")
+elseif args["nf"] == 1
+    f = open("./output_files/$(num_buses)_$(args["k"])_nf", "w")
+else
+    f = open("./output_files/$(num_buses)_$(args["k"])_nonf", "w")
+end
+
 write(f, "case model k time iterations probability load_shed expected_load_shed ac_load_shed expected_ac_load_shed lines\n")
 for solution in solution_vector
     if solution["model"] == PowerModels.GenericPowerModel{StandardNFForm}
