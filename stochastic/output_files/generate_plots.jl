@@ -63,7 +63,7 @@ for k in 2:k_max
     soc1_expected_ac_load_shed[k-1] = (typeof(solution[2]["expected_ac_load_shed"]) == Void) ? soc1_load_shed[k-1] : solution[2]["expected_ac_load_shed"]
     soc1_times[k-1] = solution[2]["time"]
     soc1_iterations[k-1] = solution[2]["iterations"]
-    
+
     #=
     soc2_load_shed[k-1] = solution[3]["load_shed"]
     soc2_ac_load_shed[k-1] = (typeof(solution[3]["ac_load_shed"]) == Void) ? soc2_load_shed[k-1] : solution[3]["ac_load_shed"]

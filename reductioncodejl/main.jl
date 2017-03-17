@@ -44,7 +44,7 @@ function run_heuristic(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4)
     end
 
     f = open("./output_files/$(length(buses))", "w")
-    write(f, "case k h_time h_obj_value probability nf nf_e dc dc_e soc soc_e ac ac_e lines\n")
+    write(f, "case k h_time h_obj_value probability nf nf_e dc dc_e soc soc_e lines\n")
 
     attack_sol = []
     for i in 1:length(successful_attacks)
@@ -105,7 +105,7 @@ function run_heuristic(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4)
                                                 "expected_load_shed" => actual_prob*result["objective"])
             write(f, "$(solution["load_shed"]) $(solution["expected_load_shed"]) ")
 
-            # solve ac model
+            #= solve ac model
             pm = ACPPowerModel(data; solver = IpoptSolver())
             post_pfls(pm)
             status, solve_time = solve(pm)
@@ -118,8 +118,9 @@ function run_heuristic(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4)
                                                 "prob" => actual_prob, "load_shed" => result["objective"],
                                                 "expected_load_shed" => actual_prob*result["objective"])
             write(f, "$(solution["load_shed"]) $(solution["expected_load_shed"]) ")
+            =#
             write(f, "$(successful_attacks[i].branch_ids)\n")
-
+            
             push!(attack_sol, attack_dict)
             # println("$(length(successful_attacks[i].branch_ids)) ... $(successful_attacks[i].total_load); branch_ids ... $([i for i in successful_attacks[i].branch_ids]); bus_ids ... $([i for i in successful_attacks[i].bus_ids])")
         end

@@ -105,7 +105,10 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
         println("ub: $zub, lb: $zlb")
     end
 
-    p_val = getvalue(p)
+    p_val = 0.0
+    for i in final_lines
+        p_val += log_p[i]
+    end
     println("###################################")
     println("k ... $k")
     println("solution = x* ... $(collect(final_lines))")
