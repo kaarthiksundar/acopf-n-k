@@ -156,7 +156,7 @@ println(ARGS[1])
 args["file"] = String(ARGS[1])
 args["k"] = parse(Int, ARGS[2])
 
-num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
+# num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
 num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
 num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
 # num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
