@@ -155,7 +155,7 @@ args = Dict{Any,Any}()
 println(ARGS[1])
 args["file"] = String(ARGS[1])
 args["k"] = parse(Int, ARGS[2])
-args["nf"] = parse(Int, ARGS[3]) # 0 - all three, 1 - only nf, 2 - no nf
+args["nf"] = parse(Int, ARGS[3]) # 0 - all three, 1 - only nf, 2 - no nf, 3 - only soc (hurricane case/uniform case)
 
 if args["nf"] == 0
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
@@ -163,6 +163,8 @@ if args["nf"] == 0
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
 elseif args["nf"] == 1
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
+elseif args["nf"] == 3
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
 else
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
@@ -173,6 +175,10 @@ if args["nf"] == 0
     f = open("./output_files/$(num_buses)_$(args["k"])", "w")
 elseif args["nf"] == 1
     f = open("./output_files/$(num_buses)_$(args["k"])_nf", "w")
+elseif args["nf"] == 3 # only use for probability distribution study where case hi or ui is appended to file name
+    a = args["file"]
+    case = split(split(a, "_")[length(split(a, "_"))], ".")[1]
+    f = open("./output_files/$(num_buses)_$(args["k"])_soc_$(case)", "w")
 else
     f = open("./output_files/$(num_buses)_$(args["k"])_nonf", "w")
 end
