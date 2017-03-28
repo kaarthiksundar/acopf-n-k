@@ -1,0 +1,2 @@
+case model k time iterations probability load_shed expected_load_shed ac_load_shed expected_ac_load_shed lines
+240 soc 5 83.635797873 38 0.0017210368000000005 293.18749997554625 0.5045864767579143 299.91882398095686 0.5161713330839494 [437,436,401,407,402] 
