@@ -55,7 +55,8 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     zlb = -1e10
     zub = 1e10
     eps = 1e-6
-
+    
+    time_taken = 0
     tic()
     solve(master_problem)
 
@@ -92,17 +93,40 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
         end
         expr = zero(AffExpr)
         for i in branch_indexes
-            if (current_xvals[i] <= eps)
-                append!(expr, 1-x[i])
-            else
+            if (current_xvals[i] > 0.9)
                 append!(expr, x[i])
             end
         end
-        @constraint(master_problem, expr <= length(branch_indexes)-1)
+        @constraint(master_problem, expr <= k-1)
         @constraint(master_problem, eta <= sub_objective + sum(alpha[i]*x[i] for i in collect(keys(alpha))))
         solve(master_problem)
         zub = getobjectivevalue(master_problem)
-        println("ub: $zub, lb: $zlb")
+        time_taken += toq()
+
+        min_value = eps + abs(zlb)
+        rel_gap = abs(zub-zlb)
+        rel_gap = (min_value > eps) ? rel_gap/min_value : rel_gap
+        print("ub: $zub, lb: $zlb, rel_gap: $((zub-zlb)/(eps+abs(zlb))), abs_gap: $(zub-zlb), ")
+        p_val = 0.0
+        for i in final_lines
+            p_val += log_p[i]
+        end
+        print("solution: $(collect(final_lines)), ")
+        log_eta = zlb - p_val
+        actual_prob = exp(p_val)
+        eta_val = exp(log_eta)
+        print("prob: $actual_prob, ")
+        print("load_shed: $eta_val, ")
+        print("time_taken: $time_taken. \n")
+        tic()
+        
+        if time_taken >= 86400
+            break
+        end
+
+        if rel_gap <= 0.05 && sign(zlb)*sign(zub) > 0
+            break
+        end
     end
 
     p_val = 0.0
@@ -122,7 +146,7 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     println("probability = prob(x*) ... $actual_prob")
     println("load shed = η* ... $eta_val")
     println("expected load shed = prob(x*)⋅η* ... $(actual_prob*eta_val)")
-    time_taken = toq()
+    time_taken += toq()
     println("time ... $time_taken")
     # solving the AC load shed model on the final set of lines
     for index in final_lines
@@ -177,8 +201,12 @@ elseif args["nf"] == 1
     f = open("./output_files/$(num_buses)_$(args["k"])_nf", "w")
 elseif args["nf"] == 3 # only use for probability distribution study where case hi or ui is appended to file name
     a = args["file"]
-    case = split(split(a, "_")[length(split(a, "_"))], ".")[1]
-    f = open("./output_files/$(num_buses)_$(args["k"])_soc_$(case)", "w")
+    if args["file"] != "../data/nesta_case1354_pegase_nk.m"
+        case = split(split(a, "_")[length(split(a, "_"))], ".")[1]
+        f = open("./output_files/$(num_buses)_$(args["k"])_soc_$(case)", "w")
+    else
+        f = open("./output_files/$(num_buses)_$(args["k"])_soc", "w")
+    end
 else
     f = open("./output_files/$(num_buses)_$(args["k"])_nonf", "w")
 end

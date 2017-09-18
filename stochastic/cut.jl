@@ -4,7 +4,7 @@ function get_cut_coefficients{T <: PowerModels.AbstractDCPForm}(pm::GenericPower
     branches = pm.ref[:branch]
     branch_indexes = keys(branches)
     alpha = Dict(i => 0.0 for i in branch_indexes)
-    p = getvariable(pm.model, :p)
+    p = getindex(pm.model, :p)
     for (i, branch) in branches
         f_bus = branch["f_bus"]
         t_bus = branch["t_bus"]
@@ -21,8 +21,8 @@ function get_cut_coefficients{T <: PowerModels.AbstractWRForm}(pm::GenericPowerM
     branch_indexes = keys(branches)
     alpha = Dict(i => 0.0 for i in branch_indexes)
     gen_indexes = keys(pm.ref[:gen])
-    p = getvariable(pm.model, :p)
-    q = getvariable(pm.model, :q)
+    p = getindex(pm.model, :p)
+    q = getindex(pm.model, :q)
     for (i, branch) in branches
         f_bus = branch["f_bus"]
         t_bus = branch["t_bus"]

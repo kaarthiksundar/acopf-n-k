@@ -20,12 +20,30 @@
 #    sbatch --job-name=stoch_case118_nf_$k --output=./output/stoch_case118_nf_$k.out ./runscript.sh ../data/nesta_case118_ieee_nk.m $k 1
 #done
 
+
+#for k in `seq 11 15`;
+#do 
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_$k.out ./runscript.sh ../data/case240_wecc_nk.m $k 2
+#done
+
+#for k in `seq 2 15`;
+#do 
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_f1_$k.out ./runscript.sh ../data/case240_wecc_nk_f1.m $k 3
+#   sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_f2_$k.out ./runscript.sh ../data/case240_wecc_nk_f2.m $k 3
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_f3_$k.out ./runscript.sh ../data/case240_wecc_nk_f3.m $k 3
+#done
+
+#for k in `seq 11 15`;
+#do 
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h1_$k.out ./runscript.sh ../data/case240_wecc_nk_h1.m $k 3
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h2_$k.out ./runscript.sh ../data/case240_wecc_nk_h2.m $k 3
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h3_$k.out ./runscript.sh ../data/case240_wecc_nk_h3.m $k 3
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h4_$k.out ./runscript.sh ../data/case240_wecc_nk_h4.m $k 3
+#    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h5_$k.out ./runscript.sh ../data/case240_wecc_nk_h5.m $k 3
+#done
+
 for k in `seq 2 10`;
 do 
-    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h1_$k.out ./runscript.sh ../data/case240_wecc_nk_h1.m $k 3
-    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h2_$k.out ./runscript.sh ../data/case240_wecc_nk_h2.m $k 3
-    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h3_$k.out ./runscript.sh ../data/case240_wecc_nk_h3.m $k 3
-    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h4_$k.out ./runscript.sh ../data/case240_wecc_nk_h4.m $k 3
-    sbatch --job-name=stoch_case240_$k --output=./output/stoch_case240_h5_$k.out ./runscript.sh ../data/case240_wecc_nk_h5.m $k 3
+    sbatch --job-name=stoch_case1888_$k --output=./output/stoch_case1888_$k.out ./runscript.sh ../data/nesta_case1888_rte_nk.m $k 3
+    sbatch --job-name=stoch_case2383_$k --output=./output/stoch_case2383_$k.out ./runscript.sh ../data/nesta_case2383wp_mp_nk.m $k 3
 done
-
