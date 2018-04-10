@@ -3,11 +3,14 @@ using Ipopt
 using CPLEX
 #using Gurobi
 using Distributions
+
 include("prob.jl")
 include("cut.jl")
 
-function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, solver = IpoptSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
-
+function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, solver = IpoptSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC", initial_cut_file = "cascades_300/IEEE_300_2.txt")
+    
+    initial_cut_branches = []
+    (initial_cut_file != "none") && (initial_cut_branches = readdlm(initial_cut_file, ',', Int64))
     data = PowerModels.parse_file(file)
     buses = Dict([(parse(Int, k), v) for (k, v) in data["bus"]])
     num_buses = length(buses)
@@ -15,15 +18,18 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     branches = Dict([(parse(Int, k), v) for (k, v) in data["branch"]])
     branches = filter((i, branch) -> branch["br_status"] == 1 && branch["f_bus"] in keys(buses) && branch["t_bus"] in keys(buses), branches)
     branch_indexes = collect(keys(branches))
+    loads = Dict([(parse(Int, k), v) for (k, v) in data["load"]])
+    loads = filter((i, load) -> load["status"] == 1 && load["load_bus"] in keys(buses), loads)
 
     log_p = Dict([(i, log(branches[i]["prob"])) for i in branch_indexes])
 
     totalload = 0.0
-    for (i,bus) in buses
-        totalload += bus["pd"]
+    for (i,load) in loads
+        totalload += load["pd"]
     end
     # println("total load: $totalload ...")
-
+    
+    quit()
     #master_problem = Model(solver=GurobiSolver(LogToConsole=0))
     master_problem = Model(solver=CplexSolver())
     @variable(master_problem, 1e-6 <= eta <= 1e6)
@@ -33,6 +39,15 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
 
     @constraint(master_problem, sum(x) == k)
     @constraint(master_problem, p == sum(x[i]*log_p[i] for i in branch_indexes))
+    
+    # adding cuts to remove some previously found solutions
+    for i in 1:size(initial_cut_branches)[1]
+        expr = zero(AffExpr)
+        for j in initial_cut_branches[i,:]
+            append!(expr, x[j])
+        end
+        @constraint(master_problem, expr <= k-1)
+    end
 
     @objective(master_problem, Max, y)
     # add outer approximation of constraint y ⩽ p + log η using lazy constraint callback:  y ⩽ p + log η₀ + 1/η₀(η - η₀)
@@ -172,14 +187,16 @@ function master_problem(; file = "../data/nesta_case24_ieee_rts_nk.m", k = 4, so
     return num_buses
 end
 
-solution_dict = Dict{AbstractString,Any}()
+# solution_dict = Dict{AbstractString,Any}()
 solution_vector = Any[]
 
 args = Dict{Any,Any}()
 println(ARGS[1])
 args["file"] = String(ARGS[1])
-args["k"] = parse(Int, ARGS[2])
-args["nf"] = parse(Int, ARGS[3]) # 0 - all three, 1 - only nf, 2 - no nf, 3 - only soc (hurricane case/uniform case)
+args["initial_nk_cut_file"] = String(ARGS[2])
+args["k"] = parse(Int, ARGS[3])
+args["nf"] = parse(Int, ARGS[4]) # 0 - all three, 1 - only nf, 2 - no nf, 3 - only soc (hurricane case/uniform case)
+(args["initial_nk_cut_file"] == "none") && (assert(args["nf"] == 3))
 
 if args["nf"] == 0
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
@@ -188,13 +205,17 @@ if args["nf"] == 0
 elseif args["nf"] == 1
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = NFPowerModel, cut_constructor = "DC")
 elseif args["nf"] == 3
-    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
+    num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC", initial_cut_file=args["initial_nk_cut_file"])
 else
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = DCPPowerModel, cut_constructor = "DC")
     num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "DC")
 end
 # num_buses = master_problem(file = args["file"], k = args["k"], solver = CplexSolver(), model_constructor = SOCWRPowerModel, cut_constructor = "AC")
 
+println(solution_vector)
+
+
+#= original n-k Networks paper output-writes
 if args["nf"] == 0
     f = open("./output_files/$(num_buses)_$(args["k"])", "w")
 elseif args["nf"] == 1
@@ -225,8 +246,9 @@ for solution in solution_vector
 end
 
 close(f)
+=# 
 
-#=
+#= Commented out before n-k networks paper final runs
 solution_dict["solution"] = solution_vector
 json_string = JSON.json(solution_dict)
 if endswith(args["file"], "api.m")
