@@ -2,7 +2,7 @@
 
 This repository contains the code for the paper entitled "Probabilistic N-k Failure Identification for Power Systems" ([published version](https://onlinelibrary.wiley.com/doi/abs/10.1002/net.21806) and [arxiv](https://arxiv.org/abs/1704.05391)). 
 
-For details on the algorithm, readers are refered to either of the above versions. The code is written in the Julia Programming language using [JuMP](https://github.com/JuliaOpt/JuMP.jl) and [PowerModels](https://github.com/lanl-ansi/PowerModels.jl). 
+For details on the algorithm, readers are refered to either of the above versions. The code is written in the Julia Programming language using [JuMP](https://github.com/JuliaOpt/JuMP.jl) and [PowerModels](https://github.com/lanl-ansi/PowerModels.jl) v0.3.0. 
 
 ## Citing the work
 
