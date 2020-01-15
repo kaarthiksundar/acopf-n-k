@@ -1,1 +1,0 @@
-{"solution":[{"iterations":5,"time":6.63505626,"k":6,"model":"PowerModels.GenericPowerModel{PowerModels.SOCWRForm}","lines":[2,6,4,3,5,15],"load_shed":2.3729999998973765,"cut":"DC","ac_load_shed":null}]}

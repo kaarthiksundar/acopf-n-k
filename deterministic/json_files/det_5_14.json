@@ -1,1 +1,0 @@
-{"solution":[{"iterations":8,"time":4.413519473,"k":5,"model":"PowerModels.GenericPowerModel{PowerModels.StandardDCPForm}","lines":[2,8,4,3,5],"load_shed":2.3729999999999998,"cut":"DC","ac_load_shed":0}]}

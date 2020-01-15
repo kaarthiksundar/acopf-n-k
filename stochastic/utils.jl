@@ -63,7 +63,7 @@ mutable struct Problem
         p.data = data
         p.ref = PMs.build_ref(data)[:nw][0]
         p.total_load = sum([abs(load["pd"]) for (i, load) in p.ref[:load]]) 
-        p.model = Model()
+        p.model = JuMP.Model()
         p.best_solution = Vector{Int}()
         p.current_solution = Vector{Int}()
         p.upper_bound = Inf
@@ -99,6 +99,20 @@ function set_dual_bounds(p::Problem, dual_bounds::Dict)
     p.dual_bounds = dual_bounds
     return 
 end
+
+function set_upper_bound(p::Problem, upper_bound::Float64)
+    p.upper_bound = upper_bound
+    return 
+end
+
+function set_current_solution(p::Problem)
+    x = getindex(p.model, :x)
+    xval = i -> JuMP.value(x[i])
+    xvals = Dict( i => xval(i) for i in keys(p.ref[:branch]))
+    selected_branches = collect( keys( filter( entry -> entry.second > 0.9, xvals ) ) )
+    p.current_solution = selected_branches
+    return 
+end 
 
 mutable struct Table
     fields::Dict{Symbol,Any}
@@ -227,3 +241,16 @@ function get_table_line(t::Table, c::Configuration)
 
     return line 
 end 
+
+function clear_data_fields(data)
+    empty!(data["shunt"])
+    for (i, branch) in data["branch"]
+        if (branch["transformer"] == true)
+            branch["transformer"] = false 
+            branch["tap"] = 1.0
+            delete!(branch, "angle")
+        end
+        branch["b_fr"] = 0.0
+        branch["b_to"] = 0.0
+    end 
+end

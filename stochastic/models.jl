@@ -1,15 +1,15 @@
 function populate_model(p::Problem, c::Configuration)
     
-    @variable(p.model, x[keys(p.ref[:branch])], Bin)
-    @constraint(p.model, budget, sum(x) == get_k(c))
-    @variable(p.model, 0 <= eta <= 1e4)
-    @variable(p.model, prob <= 0)
-    @variable(p.model, y <= 1e6)
+    JuMP.@variable(p.model, x[keys(p.ref[:branch])], Bin)
+    JuMP.@constraint(p.model, budget, sum(x) == get_k(c))
+    JuMP.@variable(p.model, 0 <= eta <= 1e4)
+    JuMP.@variable(p.model, prob <= 0)
+    JuMP.@variable(p.model, y <= 1e6)
 
     log_p = Dict([(i, log(p.ref[:branch][i]["prob"])) for i in keys(p.ref[:branch])])
-    @constraint(p.model, prob == sum(x[i]*log_p[i] for i in keys(p.ref[:branch])))
+    JuMP.@constraint(p.model, prob == sum(x[i]*log_p[i] for i in keys(p.ref[:branch])))
 
-    @objective(p.model, Max, y)
+    JuMP.@objective(p.model, Max, y)
     
     return 
 end 

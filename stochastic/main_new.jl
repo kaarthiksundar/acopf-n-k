@@ -1,4 +1,4 @@
-using JuMP
+import JuMP
 using PowerModels
 using CPLEX
 using Gurobi
@@ -22,7 +22,9 @@ print_configuration(configuration)
 (configuration.debug) && (Memento.setlevel!(logger, "debug"))
 
 # setting up problem data structure
-problem = Problem(PMs.parse_file(get_case(configuration)))
+data = PMs.parse_file(get_case(configuration))
+clear_data_fields(data)
+problem = Problem(data)
 print_total_load(problem)
 
 # create and solve model

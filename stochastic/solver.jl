@@ -9,7 +9,7 @@ function solve(p::Problem, c::Configuration, t::Table)
             set_upper_bound(p, 1e4)
         else
             cplex_optimizer = with_optimizer(CPLEX.Optimizer)
-            MOI.set(p.model, MOI.RawParameter("CPXPARAM_ScreenOutput"), 1)
+            MOI.set(p.model, MOI.RawParameter("CPX_PARAM_SCRIND"), 0)
             time = @elapsed JuMP.optimize!(p.model, cplex_optimizer)
             @show JuMP.termination_status(p.model) == MOI.OPTIMAL
             (JuMP.termination_status(p.model) == MOI.INFEASIBLE) && (print_table_footer(t); termination_flag = 1; break)
@@ -19,7 +19,7 @@ function solve(p::Problem, c::Configuration, t::Table)
         end
 
         # create inner problem using interdiction plan 
-        time_inner, status, inner_model = solve_inner_problem(p, c, Model())
+        time_inner, status, inner_model = solve_inner_problem(p, c, JuMP.Model())
         time += time_inner
 
         solution_dict = get_inner_solution(p, inner_model)
