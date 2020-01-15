@@ -14,6 +14,7 @@ logger = Memento.config!("info")
 include("parse.jl")
 include("utils.jl")
 include("models.jl")
+include("inner_problem.jl")
 include("solver.jl")
 
 # reading command line arguments
