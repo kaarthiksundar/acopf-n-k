@@ -1,7 +1,7 @@
 function solve_inner_problem(prob::Problem, c::Configuration, model=JuMP.Model())
 
     # initializing solver
-    ipopt_optimizer = with_optimizer(Ipopt.Optimizer, print_level=0, sb="yes")
+    ipopt_optimizer = JuMP.with_optimizer(Ipopt.Optimizer, print_level=0, sb="yes")
 
     # deactivate the branches in prob.data 
     for index in get_current_solution(prob)
@@ -12,59 +12,15 @@ function solve_inner_problem(prob::Problem, c::Configuration, model=JuMP.Model()
     @assert !haskey(prob.data, "multinetwork")
     @assert !haskey(prob.data, "conductors")
 
-    ref = PMs.build_ref(prob.data)[:nw][0]
-
-    @variable(model, va[i in keys(ref[:bus])])
-    
-    @variable(model, 0 <= pg[i in keys(ref[:gen])] <= ref[:gen][i]["pmax"])
-    
-    @variable(model, -ref[:branch][l]["rate_a"] <= p[(l,i,j) in ref[:arcs_from]] <= ref[:branch][l]["rate_a"])
-
-    ld_obj = Dict(i => 1.0 for i in keys(ref[:load]))
-    for (i, load) in ref[:load]
-        (load["pd"] < 0) && (ld_obj[i] = -1.0)
-    end 
-    @variable(model, 0 <= ld[i in keys(ref[:load])] <= 1.0)
-
-    p_expr = Dict([((l,i,j), 1.0*p[(l,i,j)]) for (l,i,j) in ref[:arcs_from]])
-    p_expr = merge(p_expr, Dict([((l,j,i), -1.0*p[(l,i,j)]) for (l,i,j) in ref[:arcs_from]]))
-
-    for (i, bus) in ref[:ref_buses]
-        @constraint(model, va[i] == 0)
-    end 
-
-    for (i, bus) in ref[:bus]
-        bus_loads = [ref[:load][l] for l in ref[:bus_loads][i]]
-
-        # Bus KCL
-        @constraint(model, 
-            sum(p_expr[a] for a in ref[:bus_arcs][i]) == 
-            sum(pg[g] for g in ref[:bus_gens][i]) -
-            sum(load["pd"] * (1-ld[load["index"]]) for load in bus_loads)
-        )
-    end
-
-    for (i,branch) in ref[:branch]
-        f_idx = (i, branch["f_bus"], branch["t_bus"])
-
-        p_fr = p[f_idx]
-        va_fr = va[branch["f_bus"]]
-        va_to = va[branch["t_bus"]]
-
-        g, b = PMs.calc_branch_y(branch)
-
-        # Power flow constraints
-        @constraint(model, p_fr + b*(va_fr - va_to) == 0)
-    end
-
-    @objective(model, Min, sum(load["pd"] * ld_obj[i] * ld[i] for (i, load) in ref[:load]))
+    result = run_mld(prob.data, PMs.DCPPowerModel, ipopt_optimizer; 
+        setting = Dict("output" => Dict("branch_flows" => true)))
 
     # activate the branches in p.data 
     for index in get_current_solution(prob)
         prob.data["branch"][string(index)]["br_status"] = 1
     end 
 
-    time = @elapsed status = JuMP.solve(model)
+    
 
     for (l,i,j) in ref[:arcs_from]
         (abs(getdual(p[(l,i,j)])) > 1.0) && debug(logger, "($l,$i,$j) -> $(getvalue(p[(l,i,j)])), $(getdual(p[(l,i,j)]))")
