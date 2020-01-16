@@ -10,48 +10,34 @@ function populate_model(p::Problem, c::Configuration)
     JuMP.@constraint(p.model, prob == sum(x[i]*log_p[i] for i in keys(p.ref[:branch])))
 
     JuMP.@objective(p.model, Max, y)
+
+    function outer_approximate(cb)
+        eta_val = MOI.get(
+            JuMP.backend(JuMP.owner_model(eta)), 
+            MOI.CallbackVariablePrimal(cb), JuMP.index(eta)
+        )
+        prob_val = MOI.get(
+            JuMP.backend(JuMP.owner_model(prob)), 
+            MOI.CallbackVariablePrimal(cb), JuMP.index(prob)
+        )
+        if eta_val > 0.0
+            inv_eta_val = 1/eta_val
+            con = JuMP.@build_constraint(y <= prob + log(eta_val) + inv_eta_val*(eta - eta_val))
+            MOI.submit(p.model, MOI.LazyConstraint(cb), con)
+        end
+    end
+
+    MOI.set(p.model, MOI.LazyConstraintCallback(), outer_approximate)
     
     return 
 end 
 
 function add_cutting_plane(p::Problem, sol::Dict{String,Any})
-    # current_solution = get_current_solution(p)
-    # x = getindex(p.model, :x)
-    # eta = getindex(p.model, :eta)
-    # prob = getindex(p.model, :prob)
-    # y = getindex(p.model, :y)
-    # load_shed = get_current_incumbent(p)
 
-    # eta_val = getvalue(eta)
-    #     p_val = getvalue(p)
-    #     if eta_val > 0.0
-    #         inv_eta_val = 1/eta_val
-    #         @lazyconstraint(cb, y <= p + log(eta_val) + inv_eta_val*(eta - eta_val))
-    #     end
-
-    # flow = sol["branch_flow"]
-    # dual_bounds = get_dual_bounds(p)
-
-    # var = Any[] 
-    # coeff = Any[]
-    # constant = load_shed
-
-    # for (i, branch) in p.ref[:branch]
-    #     f_bus = branch["f_bus"]
-    #     t_bus = branch["t_bus"]
-    #     arc = (i, branch["f_bus"], branch["t_bus"])
-    #     g, b = PMs.calc_branch_y(branch)
-    #     if !(i in current_solution) 
-    #         push!(var, x[i])
-    #         flow_bound = (flow[arc] > 0) ? dual_bounds[i][:ub] : dual_bounds[i][:lb]
-    #         flow_val = round(abs(flow[arc]) * flow_bound; digits=4)
-    #         push!(coeff, flow_val)
-    #     end 
-    # end 
-
-    # expr = AffExpr(var, coeff, constant)
-
-    # @constraint(p.model, eta <= expr)
-    
     return 
 end 
+
+function add_no_good_cut(p::Problem, c::Configuration)
+
+    return 
+end

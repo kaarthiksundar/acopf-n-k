@@ -114,6 +114,26 @@ function set_current_solution(p::Problem)
     return 
 end 
 
+function set_current_incumbent(p::Problem, lb) 
+    p.current_incumbent = lb
+    return 
+end
+
+function set_best_solution(p::Problem, solution::Vector{Int})
+    p.best_solution = solution
+    return 
+end 
+
+function set_best_incumbent(p::Problem, lb) 
+    p.best_incumbent = lb
+    return 
+end
+
+function update_opt_gap(p::Problem)
+    p.opt_gap = (p.upper_bound-p.best_incumbent)/(p.upper_bound+1e-5)
+    return
+end 
+
 mutable struct Table
     fields::Dict{Symbol,Any}
     field_chars::Dict{Symbol,Any}

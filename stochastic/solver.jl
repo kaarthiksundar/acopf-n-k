@@ -8,7 +8,7 @@ function solve(p::Problem, c::Configuration, t::Table)
         if get_iteration_count(p) == 0 && length(get_current_solution(p)) == c.k
             set_upper_bound(p, 1e4)
         else
-            cplex_optimizer = with_optimizer(CPLEX.Optimizer)
+            cplex_optimizer = JuMP.with_optimizer(CPLEX.Optimizer)
             MOI.set(p.model, MOI.RawParameter("CPX_PARAM_SCRIND"), 0)
             time = @elapsed JuMP.optimize!(p.model, cplex_optimizer)
             @show JuMP.termination_status(p.model) == MOI.OPTIMAL
@@ -19,11 +19,11 @@ function solve(p::Problem, c::Configuration, t::Table)
         end
 
         # create inner problem using interdiction plan 
-        time_inner, status, inner_model = solve_inner_problem(p, c, JuMP.Model())
+        time_inner, status, solution = solve_inner_problem(p, c)
         time += time_inner
 
-        solution_dict = get_inner_solution(p, inner_model)
-        add_cutting_plane(p, solution_dict)
+        cut_coefficients = get_cut_coefficients(p, c, solution)
+        add_cutting_plane(p, cut_coefficients)
         add_no_good_cut(p, c)
 
         # iteration count 

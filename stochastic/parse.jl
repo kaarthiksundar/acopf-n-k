@@ -17,7 +17,7 @@ function parse_commandline()
         "--problem_type"
         help = "[:nf, :dc, :soc]"
         arg_type = Symbol 
-        default = :nf
+        default = :dc
 
         "--timeout", "-t"
         help = "time limit for the run in seconds"
